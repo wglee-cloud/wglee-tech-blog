@@ -26,7 +26,7 @@ linux 시스템에서 network traffic을 관리하기 위한 방법으로 iptabl
 
 rule을 삭제할 때 line number를 명확하게 출력하면 삭제할 규칙의 위치를 확인하기 편하다.&#x20;
 
-```csharp
+```shell-session
 [centos@test ~]$ sudo iptables -nvL --line-numbers
 Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
 num   pkts bytes target     prot opt in     out     source               destination
@@ -53,7 +53,7 @@ iptables rule은 순서(order)의 영향을 받는다. iptables의 rule은 위�
 
 순서를 고치기 위해서는 기존의 rule을 파일로 export 해서 수정한 다음 다시  restore 해서 적용한다. &#x20;
 
-```csharp
+```shell-session
 [centos@test ~]$ sudo iptables-save > ~/iptables.txt
 [centos@test ~]$ ls
 iptables.txt
@@ -66,7 +66,7 @@ iptables.txt
 
 해당 linux system 으로 들어오는 패킷을 허용하는 rule이다. 기본 포맷은 다음과 같다.
 
-```csharp
+```shell-session
 [centos@test ~]$ iptables -I INPUT <other options>
 ```
 
@@ -74,7 +74,7 @@ iptables.txt
     보통은 Input chain의 가장 마지막에 모든 패킷을 drop 시키는 rule을 추가하고는 한다.\
 
 
-    ```csharp
+    ```shell-session
     [centos@test ~]$ sudo iptables -A INPUT -j DROP
 
     [centos@test ~]$ sudo iptables -nvL --line-numbers
@@ -94,7 +94,7 @@ iptables.txt
     예를 들어 ssh 접속을 위해 22번 input packet을 허용하는 rule은 다음과 같이 추가할 수 있다. \
 
 
-    ```csharp
+    ```shell-session
     [centos@test ~]$ sudo iptables -I INPUT 2 -s 192.168.0.30/24 -p tcp --dport 22 -j ACCEPT
 
     [centos@test ~]$ sudo iptables -nvL --line-numbers
@@ -109,7 +109,7 @@ iptables.txt
 *   \-D (delete) 지정한 line에 있는 rule을 삭제한다.\
 
 
-    ```csharp
+    ```shell-session
     [centos@test ~]$ sudo iptables -D INPUT 2
 
     [centos@test ~]$ sudo iptables -nvL --line-numbers
@@ -127,7 +127,7 @@ OUTPUT chain은 해당 서버에서 바깥으로 나가는 outgoing packet에 �
 FORWORD Chain은 해당 리눅스 시스템을 통과하는 패킷에 대한 것이다.\
 insert, append, delete 등에 대한 명령어 규칙은 INPUT chain 하면서 알아본 것과 동일하다.
 
-```csharp
+```shell-session
 [centos@test ~]$ iptables -I OUTPUT <other options>
 [centos@test ~]$ iptables -I FORWORD <other options>
 ```
@@ -138,7 +138,7 @@ insert, append, delete 등에 대한 명령어 규칙은 INPUT chain 하면서 �
 
 설정한 iptables가 reboot 후에도 지속되기를 원한다면, iptables 룰을 `/etc/sysconfig/iptables` 경로  저장하여  수정한 뒤 다시 import 해 준다.&#x20;
 
-```shell
+```shell-session
 [root@test ~]# sudo iptables-save > /etc/sysconfig/iptables
 .. 룰 추가
 [root@test ~]# sudo iptables-restore < /etc/sysconfig/iptables
