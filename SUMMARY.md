@@ -6,6 +6,7 @@
 
 * [✨ Linux](tech/linux/README.md)
   * [NTP](tech/linux/ntp.md)
+  * [NTPD로 NTP 설정하기](tech/linux/ntpd-ntp.md)
 * [🌟 Network](tech/network.md)
 * [🐳 Kubernetes](tech/kubernetes.md)
 * [🎯 Ceph](tech/ceph.md)

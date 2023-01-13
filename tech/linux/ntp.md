@@ -1,3 +1,7 @@
+---
+description: written on 2021. 2. 19. 11:15
+---
+
 # NTP
 
 ## Overview
