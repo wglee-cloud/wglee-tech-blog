@@ -2,7 +2,7 @@
 description: 2022. 8. 27. 19:05
 ---
 
-# 삭제하기 (lvremove, vgremove, pvremove)
+# lvm 구축한 것 삭제하기 (lvremove, vgremove, pvremove)
 
 ## Intro
 

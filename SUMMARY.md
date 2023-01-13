@@ -27,7 +27,7 @@
   * [Shell Script 짜면서 찾아봤던 것들](tech/linux/shell-script.md)
   * [SNAT / DNAT 개념과 iptables 에 NAT 룰 적용해보기](tech/linux/snat-dnat-iptables-nat.md)
   * [MBR, GPT 파티셔닝 차이점 및 Primary / Extended Partition 이해하기](tech/linux/mbr-gpt-primary-extended-partition.md)
-  * [lvm 구축한 것 삭제하기 (lvremove, vgremove, pvremove)](tech/linux/lvm-lvremove-vgremove-pvremove.md)
+  * [lvm 구축한 것 삭제하기 (lvremove, vgremove, pvremove)](tech/linux/lvremove-vgremove-pvremove.md)
   * [로컬 yum 레포지터리 만들기! (reposync, yumdownloader, createrepo)](tech/linux/yum-reposync-yumdownloader-createrepo.md)
   * [\[LVM\] lvextend 로 logical volume 확장하기](tech/linux/lvm-lvextend-logical-volume.md)
   * [fallocate 명령어로 만든 파일의 mkswap 불가 현상 (sparse file)](tech/linux/fallocate-mkswap-sparse-file.md)

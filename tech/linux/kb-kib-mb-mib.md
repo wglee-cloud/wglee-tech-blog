@@ -66,7 +66,7 @@ IEC 단위를 사용하는 이유는 SE 단위가 인간 친화적인 것에 반
 컴퓨터는 1TB에 해당하는 1,000,000,000,000 byte를 2진수로 계산하여 1TB가 아닌 931.322 GiB 로 인식한다.\
 SI/ IEC 단위에 따른 오차 가이드 라인은 아래 IBM 문서에서 확인할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>image from https://www.ibm.com/docs/en/storage-insights?topic=overview-units-measurement-storage-data</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>image from https://www.ibm.com/docs/en/storage-insights?topic=overview-units-measurement-storage-data</p></figcaption></figure>
 
 
 

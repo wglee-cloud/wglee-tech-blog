@@ -9,7 +9,7 @@ description: 2022. 9. 24. 22:00
 PAM (Pluggable Authentication Modules) 은 console/network ssh 등으로 시스템에 로그인 할 때 사용자 인증에 사용되는 모듈이다.\
 PAM 은 다양한 application 들이 각자의 상황에 맞는 인증을 하도록 모듈화 할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>image from <a href="https://www.redhat.com/sysadmin/pluggable-authentication-modules-pam">https://www.redhat.com/sysadmin/pluggable-authentication-modules-pam</a></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>image from <a href="https://www.redhat.com/sysadmin/pluggable-authentication-modules-pam">https://www.redhat.com/sysadmin/pluggable-authentication-modules-pam</a></p></figcaption></figure>
 
 
 
