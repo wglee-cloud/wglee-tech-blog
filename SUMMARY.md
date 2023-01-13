@@ -10,6 +10,7 @@
   * [SUDO / SU / Wheel Group](tech/linux/sudo-su-wheel-group.md)
   * [iptables 다뤄보기](tech/linux/iptables.md)
   * [Systemd로 서비스 관리하기](tech/linux/systemd.md)
+  * [사용자 계정 정보 - /etc/passwd , /etc/shadow](tech/linux/etc-passwd-etc-shadow.md)
 * [🌟 Network](tech/network.md)
 * [🐳 Kubernetes](tech/kubernetes.md)
 * [🎯 Ceph](tech/ceph.md)
