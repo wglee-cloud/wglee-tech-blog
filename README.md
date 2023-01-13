@@ -14,26 +14,33 @@
 
 ## Quick links
 
-{% content-ref url="wongyeonglee/network.md" %}
-[network.md](wongyeonglee/network.md)
-{% endcontent-ref %}
-
 {% content-ref url="wongyeonglee/linux.md" %}
 [linux.md](wongyeonglee/linux.md)
 {% endcontent-ref %}
 
-## Get Started
-
-We've put together some helpful guides for you to get setup with our product quickly and easily.
-
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="wongyeonglee/network.md" %}
+[network.md](wongyeonglee/network.md)
 {% endcontent-ref %}
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="wongyeonglee/kubernetes.md" %}
+[kubernetes.md](wongyeonglee/kubernetes.md)
 {% endcontent-ref %}
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="wongyeonglee/ceph.md" %}
+[ceph.md](wongyeonglee/ceph.md)
 {% endcontent-ref %}
+
+{% content-ref url="wongyeonglee/iac.md" %}
+[iac.md](wongyeonglee/iac.md)
+{% endcontent-ref %}
+
+{% content-ref url="wongyeonglee/openstack.md" %}
+[openstack.md](wongyeonglee/openstack.md)
+{% endcontent-ref %}
+
+{% content-ref url="wongyeonglee/etc.-haproxy-mariadb.md" %}
+[etc.-haproxy-mariadb.md](wongyeonglee/etc.-haproxy-mariadb.md)
+{% endcontent-ref %}
+
+
+
