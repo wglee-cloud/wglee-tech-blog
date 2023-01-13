@@ -2,12 +2,13 @@
 
 * [👋 Welcome to wglee's Blog](README.md)
 
-## 🥳 WonGyeongLee
+## 👩💻 Tech
 
-* [✨ Linux](wongyeonglee/linux.md)
-* [🌟 Network](wongyeonglee/network.md)
-* [🐳 Kubernetes](wongyeonglee/kubernetes.md)
-* [🎯 Ceph](wongyeonglee/ceph.md)
-* [🚀 IaC](wongyeonglee/iac.md)
-* [🤔 OpenStack](wongyeonglee/openstack.md)
-* [🚎 ETC. ( HAProxy, MariaDB ) ](wongyeonglee/etc.-haproxy-mariadb.md)
+* [✨ Linux](tech/linux/README.md)
+  * [NTP](tech/linux/ntp.md)
+* [🌟 Network](tech/network.md)
+* [🐳 Kubernetes](tech/kubernetes.md)
+* [🎯 Ceph](tech/ceph.md)
+* [🚀 IaC](tech/iac.md)
+* [🤔 OpenStack](tech/openstack.md)
+* [🚎 ETC. ( HAProxy, MariaDB ) ](tech/etc.-haproxy-mariadb.md)

@@ -8,7 +8,7 @@ coverY: 0
 
 ## Overview
 
-3년차 인프라 엔지니어로 근무하고 있는 이원경입니다.&#x20;
+3년차 인프라 엔지니어 이원경입니다.&#x20;
 
 블로그에 방문해 주셔서 감사합니다!!&#x20;
 
@@ -18,34 +18,36 @@ coverY: 0
 
 
 
+
+
 ## Quick links
 
-{% content-ref url="wongyeonglee/linux.md" %}
-[linux.md](wongyeonglee/linux.md)
+{% content-ref url="tech/linux/" %}
+[linux](tech/linux/)
 {% endcontent-ref %}
 
-{% content-ref url="wongyeonglee/network.md" %}
-[network.md](wongyeonglee/network.md)
+{% content-ref url="tech/network.md" %}
+[network.md](tech/network.md)
 {% endcontent-ref %}
 
-{% content-ref url="wongyeonglee/kubernetes.md" %}
-[kubernetes.md](wongyeonglee/kubernetes.md)
+{% content-ref url="tech/kubernetes.md" %}
+[kubernetes.md](tech/kubernetes.md)
 {% endcontent-ref %}
 
-{% content-ref url="wongyeonglee/ceph.md" %}
-[ceph.md](wongyeonglee/ceph.md)
+{% content-ref url="tech/ceph.md" %}
+[ceph.md](tech/ceph.md)
 {% endcontent-ref %}
 
-{% content-ref url="wongyeonglee/iac.md" %}
-[iac.md](wongyeonglee/iac.md)
+{% content-ref url="tech/iac.md" %}
+[iac.md](tech/iac.md)
 {% endcontent-ref %}
 
-{% content-ref url="wongyeonglee/openstack.md" %}
-[openstack.md](wongyeonglee/openstack.md)
+{% content-ref url="tech/openstack.md" %}
+[openstack.md](tech/openstack.md)
 {% endcontent-ref %}
 
-{% content-ref url="wongyeonglee/etc.-haproxy-mariadb.md" %}
-[etc.-haproxy-mariadb.md](wongyeonglee/etc.-haproxy-mariadb.md)
+{% content-ref url="tech/etc.-haproxy-mariadb.md" %}
+[etc.-haproxy-mariadb.md](tech/etc.-haproxy-mariadb.md)
 {% endcontent-ref %}
 
 
