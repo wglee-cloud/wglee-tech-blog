@@ -34,7 +34,7 @@ Permissive
 \
 
 
-### SELinux labels
+## SELinux labels
 
 특정 프로세스에 어떤 SELinux 룰이 적용되어 있는지 보고 싶으면 보통 -Z 옵션을 사용하면 된다.\
 ps, ls, cp, mkdir 등의 명령어에서 활용 가능하다.
