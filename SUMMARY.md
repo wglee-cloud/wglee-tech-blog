@@ -8,6 +8,6 @@
 * [🌟 Network](wongyeonglee/network.md)
 * [🐳 Kubernetes](wongyeonglee/kubernetes.md)
 * [🎯 Ceph](wongyeonglee/ceph.md)
-* [🐥 IaC](wongyeonglee/iac.md)
+* [🚀 IaC](wongyeonglee/iac.md)
 * [🤔 OpenStack](wongyeonglee/openstack.md)
-* [😉 ETC. ( HAProxy, MariaDB ) ](wongyeonglee/etc.-haproxy-mariadb.md)
+* [🚎 ETC. ( HAProxy, MariaDB ) ](wongyeonglee/etc.-haproxy-mariadb.md)
