@@ -9,6 +9,7 @@
   * [NTPD로 NTP 설정하기](tech/linux/ntpd-ntp.md)
   * [SUDO / SU / Wheel Group](tech/linux/sudo-su-wheel-group.md)
   * [iptables 다뤄보기](tech/linux/iptables.md)
+  * [Systemd로 서비스 관리하기](tech/linux/systemd.md)
 * [🌟 Network](tech/network.md)
 * [🐳 Kubernetes](tech/kubernetes.md)
 * [🎯 Ceph](tech/ceph.md)
