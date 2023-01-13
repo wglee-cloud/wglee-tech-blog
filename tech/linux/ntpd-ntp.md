@@ -165,6 +165,3 @@ synchronised to NTP server (ip) at stratum 3
 * [Other fields in ntpq -p command output](https://www.thegeekdiary.com/what-is-the-refid-in-ntpq-p-output/)
 * [Network time protocol (NTP): definition and functionality](https://www.ionos.com/digitalguide/server/know-how/network-time-protocol-ntp/)
 
-```
-// Some code
-```
