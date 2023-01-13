@@ -8,16 +8,15 @@ description: Written on 2021. 3. 2. 01:22
 
 linux 시스템에서 network traffic을 관리하기 위한 방법으로 iptables과 firewalld가 있다.
 
-이 둘의 차이에 대해 알아보고, iptables로 패킷 관리하는 방법에 대해 더 자세히 보자!
+이중 iptables의 시스템으로 들어오는 패킷을 제어하는 기본적인 사용법을 알아본다.&#x20;
 
 
 
-## firewalld vs. iptables
+## iptables ?
 
 1. iptables rule은 입력하는 순간 바로 적용되며, 별도의 데몬을 재시작 할 필요 없다.
-2. /etc/sysconfig/iptables-config에 설정파일 존재
+2. /etc/sysconfig/iptables-config에 설정 파일 존재
 3. iptables의 경우 변경이 있을 때마다 기존의 rule들을 flush한 다음 /etc/sysconfig/iptables에서 변경사항이 반영된 새로운 rule들을 읽어온다.
-4. 반면, firewalld는 새로운 rule을 추가하기만 하기 때문에 시스템 동작 중에 connection이 끊어질 위험이 없다.&#x20;
 
 &#x20;
 
