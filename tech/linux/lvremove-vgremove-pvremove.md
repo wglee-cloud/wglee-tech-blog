@@ -1,19 +1,23 @@
+---
+description: 2022. 8. 27. 19:05
+---
+
 # 삭제하기 (lvremove, vgremove, pvremove)
 
-### Intro
+## Intro
 
 disk 파티셔닝을 해서 lvm 으로 사용하고 있는데, 모든 설정을 원복하고 처음부터 다시 해보려고 한다.\
 이전에는 lvm 구축(pv, lv, vg 생성) 위주로 해봤다면 이번에는 삭제하는 과정을 테스트 해 본다.\
-이전 게시글 : [2021.09.01 - \[✨ Linux\] - LVM(Logical Volume Manager) 의 개념과 설정 방법](https://greencloud33.tistory.com/41)
+이전 게시글 : [2021.09.01 - \[✨ Linux\] - LVM(Logical Volume Manager) 의 개념과 설정 방법](lvm-logical-volume-manager.md)
 
 <figure><img src="https://blog.kakaocdn.net/dn/HCvKS/btrKIziXmbO/PkSNVRoGoqPgfJ9rRE08rk/img.png" alt=""><figcaption></figcaption></figure>
 
-**AS-IS**
+## **AS-IS**
 
 지금은 다음과 같이 설정되어 있다.\
 /dev/sda 디바이스는 /dev/sda1 \~ /dev/sda3 으로 파티셔닝 되어있고, /dev/sda2, /dev/sda3이 test\_lv라는 logical volume 으로 사용되고 있다.
 
-```
+```shell-session
 [root@server-1-lab ~]# fdisk -l /dev/sda
 
 Disk /dev/sda: 2147 MB, 2147483648 bytes, 4194304 sectors
@@ -62,35 +66,39 @@ tmpfs                       496M     0  496M   0% /sys/fs/cgroup
 tmpfs                       100M     0  100M   0% /run/user/0
 ```
 
-**TO-BE**
+
+
+## **TO-BE**
 
 /dev/sda2, /dev/sda3 파티션을 삭제하고 각각 100MB, 128MB로 다시 생성한다.
 
-### 작업
 
-**umount**
+
+## Hands-on
+
+### **umount**
 
 원복할 disk 파티션을 사용하는 test\_lv에 마운트 된 것을 해제한다.\
 fstab이 설정된 경우 fstab 도 수정 한다.
 
-```
+```shell-session
 [root@server-1-lab ~]# umount /exports/test/
 ```
 
-**Logical Volume을 Inactive 설정하기**
+### **Logical Volume을 Inactive 설정하기**
 
 test\_lv를 inactive 상태로 변경한다. lvscan 으로 logical volume 의 활성화 여부를 볼 수 있다.
 
-```
+```shell-session
 [root@server-1-lab ~]# lvchange -an /dev/testvg/test_lv
 [root@server-1-lab ~]# lvscan
   inactive          '/dev/testvg/test_lv' [200.00 MiB] inherit
   ACTIVE            '/dev/examvg/exam_lv' [92.00 MiB] inherit
 ```
 
-**Logical Volume 제거**
+### **Logical Volume 제거**
 
-```
+```shell-session
  [root@server-1-lab ~]# lvremove /dev/testvg/test_lv
   Logical volume "test_lv" successfully removed
 
@@ -111,7 +119,7 @@ vda                252:0    0   30G  0 disk
 lv를 삭제하고 나서 바로 pv를 삭제하려고 하면 당연히 에러가 난다.\
 일단 lv를 삭제하고 쓰지 않고 있기 때문에 PFree값이 모두 PSize와 동일하다.
 
-```
+```shell-session
  [root@server-1-lab ~]# pvs
   PV         VG     Fmt  Attr PSize   PFree
   /dev/sda1  examvg lvm2 a--   92.00m      0
@@ -124,13 +132,13 @@ lv를 삭제하고 나서 바로 pv를 삭제하려고 하면 당연히 에러�
   /dev/sda3: physical volume label not removed.
 ```
 
-**Volume Group 삭제**
+### **Volume Group 삭제**
 
 vgreduce 명령어를 사용하여 vg에서 pv를 제거할 수 있다.\
 이때 PV가 하나밖에 없는 상태에서 마지막 PV를 제거하려고 하면 vg에 대한 metadata를 저장할 공간이 없어서 실패한다.\
 vgreduce 명령어는 말 그대로 "reduce" 하는 것이고, 어차피 testvg 자체를 지울 거라서 바로 vgremove를 했다.
 
-```
+```shell-session
 [root@server-1-lab ~]# vgreduce testvg /dev/sda2
   Removed "/dev/sda2" from volume group "testvg"
 
@@ -145,11 +153,11 @@ vgreduce 명령어는 말 그대로 "reduce" 하는 것이고, 어차피 testvg 
   examvg   1   1   0 wz--n- 92.00m    0
 ```
 
-**Pyhical Volume 삭제**
+### **Pyhical Volume 삭제**
 
 pv 정보를 조회하면 testvg 삭제로 인해 /dev/sda2, /dev/sda3에 vg 정보가 없는 것을 볼 수 있다.
 
-```
+```shell-session
 [root@server-1-lab ~]# pvs
   PV         VG     Fmt  Attr PSize   PFree
   /dev/sda1  examvg lvm2 a--   92.00m      0
@@ -159,7 +167,7 @@ pv 정보를 조회하면 testvg 삭제로 인해 /dev/sda2, /dev/sda3에 vg 정
 
 pvremove로 pv를 삭제한다.
 
-```
+```shell-session
 [root@server-1-lab ~]# pvremove /dev/sda2
   Labels on physical volume "/dev/sda2" successfully wiped.
 [root@server-1-lab ~]# pvremove /dev/sda3
@@ -173,7 +181,7 @@ pvremove로 pv를 삭제한다.
 
 이렇게 /dev/testvg/test\_lv lvm 구축되어 있던 것을 모두 삭제하였다.
 
-```
+```shell-session
 [root@server-1-lab ~]# pvs
   PV         VG     Fmt  Attr PSize  PFree
   /dev/sda1  examvg lvm2 a--  92.00m    0
@@ -198,6 +206,9 @@ vda                252:0    0   30G  0 disk
 `-vda1             252:1    0   30G  0 part /
 ```
 
-**참고 문서**
 
-[https://tylersguides.com/guides/remove-an-lvm-disk/](https://tylersguides.com/guides/remove-an-lvm-disk/)
+
+## **참고 문서**
+
+{% embed url="https://tylersguides.com/guides/remove-an-lvm-disk/" %}
+
