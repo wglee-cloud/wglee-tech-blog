@@ -1,3 +1,9 @@
+---
+cover: >-
+  https://images.unsplash.com/photo-1607585011081-241d2bacb7de?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwxOTcwMjR8MHwxfHNlYXJjaHwyfHxzd2lzc3xlbnwwfHx8fDE2NzM1OTQ0NzA&ixlib=rb-4.0.3&q=80
+coverY: 0
+---
+
 # 👋 Welcome to wglee's Blog
 
 ## Overview
