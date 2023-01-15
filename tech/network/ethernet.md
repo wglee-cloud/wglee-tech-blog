@@ -68,3 +68,9 @@ LAN 구성을 더 잘 이해하기 위해 Ethernet에 대해 대략적으로 알
 
 다음에는 LAN 구성부터 해서 스위치, 라우터 등에 트래픽이 어떻게 흐르는지 확인해 보도록 하겠다.&#x20;
 
+
+
+## 참고 문서
+
+[https://www.udemy.com/course/complete-networking-fundamentals-course-ccna-start/](https://www.udemy.com/course/complete-networking-fundamentals-course-ccna-start/) 강의 일부
+
