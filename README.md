@@ -26,8 +26,8 @@ coverY: 0
 [linux](tech/linux/)
 {% endcontent-ref %}
 
-{% content-ref url="tech/network.md" %}
-[network.md](tech/network.md)
+{% content-ref url="tech/network/" %}
+[network](tech/network/)
 {% endcontent-ref %}
 
 {% content-ref url="tech/kubernetes.md" %}
