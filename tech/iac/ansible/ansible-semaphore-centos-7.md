@@ -1,31 +1,39 @@
+---
+description: 2022. 9. 5. 09:04
+---
+
 # Ansible Semaphore 설치 (CentOS 7)
 
-### Intro
+## Intro
 
 오늘은 Ansible Semaphore 에 대해 알아보도록 한다.\
 Ansible Semaphore 는 Ansible Playbook을 UI 적으로 관리할 수 있는 인터페이스이다.\
 Web UI로 쉽게 다룰 수 있어 cli 사용이 어려운 비엔지니어도 사용이 편리하다.\
 또한 역할 기반으로 엑세스를 제어하여 보안을 높이고,\
-각 task별로 cron을 등록해 스케줄링이 가능하다.
+각 task별로 cron을 등록해 스케줄링할 수 있다.&#x20;
 
 * Semaphore Home : [https://ansible-semaphore.com/](https://ansible-semaphore.com/)
 * Semaphore Docs : [https://docs.ansible-semaphore.com/](https://docs.ansible-semaphore.com/)
 
-### 설치 환경
+
+
+## 설치 환경
 
 * Centos 7.6
 * Ansible Semaphore 최신 버전 ( v2.8.49 )
 * Ansible 2.9.27
 
-### 설치 과정
+
+
+## 설치 과정
 
 Ansible Semphore를 package 방식으로 설치할 경우 Python, Ansible, Git 이 사전에 설치되어 있어야 한다.
 
-#### MariaDB 설치
+## MariaDB 설치
 
 semphore 를 설치하는 서버에 MariaDB를 설치한다.
 
-```
+```shell-session
 [root@wglee-deploy ~]# yum install -y https://dev.mysql.com/get/mysql80-community-release-el7-7.noarch.rpm
 [root@wglee-deploy ~]# yum repolist enabled | grep "mysql.*"
 mysql-connectors-community/x86_64 MySQL Connectors Community                 199
@@ -52,7 +60,7 @@ Complete!
 
 mariaDB의 초기 패스워드를 확인하여 root 로 접근한 다음, 보안성 높을 패스워드로 변경한다.
 
-```
+```shell-session
 [root@wglee-deploy ~]# grep 'temporary password' /var/log/mysqld.log
 2022-09-01T08:11:51.426277Z 6 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: [임시패스워드]
 
@@ -66,21 +74,23 @@ mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY '어려운패스워드';
 Query OK, 0 rows affected (0.04 sec)
 ```
 
-#### semaphore 설치
+
+
+## semaphore 설치
 
 [https://docs.ansible-semaphore.com/administration-guide/installation#package-manager](https://docs.ansible-semaphore.com/administration-guide/installation#package-manager)\
 위의 공식 문서를 기반으로 설치하였다.
 
 semaphore 패키지를 설치한다.
 
-```
+```shell-session
 [root@wglee-deploy ~]# wget https://github.com/ansible-semaphore/semaphore/releases/download/v2.8.49/semaphore_2.8.49_linux_amd64.rpm
 [root@wglee-deploy ~]# sudo yum install semaphore_2.8.49_linux_amd64.rpm
 ```
 
 semaphore setup 을 수행한다.
 
-```
+```shell-session
 [root@wglee-deploy ~]# semaphore setup
 
 Hello! You will now be guided through a setup to:
@@ -151,7 +161,7 @@ nohup ./semaphore server --config yes/config.json &
 
 setup 을 완료하면 mariaDB에 semaphore 데이터베이스가 생성된다.
 
-```
+```shell-session
 mysql> show databases;
 +--------------------+
 | Database           |
@@ -196,7 +206,7 @@ mysql> show tables;
 
 semaphore 서버가 setup 으로 인해 생성된 config.json 을 사용하도록 한다.
 
-```
+```shell-session
 [root@wglee-deploy ~]# semaphore server --config ~/config.json
 MySQL root@127.0.0.1:3306 semaphore
 Tmp Path (projects home) /opt/semaphore
@@ -206,8 +216,13 @@ Port :3000
 Server is running
 ```
 
-### 설치 완료
+
+
+## 설치 완료
 
 semaphore가 설치된 가상서버의 공인 IP에 semaphore가 동작중인 3000번 포트로 semaphore web에 접근할 수 있다.
 
 <figure><img src="https://blog.kakaocdn.net/dn/bh4fdx/btrLiCtmLWv/Zik2HD8DsBY0kKvMNVd7K0/img.png" alt=""><figcaption></figcaption></figure>
+
+
+

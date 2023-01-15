@@ -38,8 +38,8 @@ coverY: 0
 [ceph.md](tech/ceph.md)
 {% endcontent-ref %}
 
-{% content-ref url="tech/iac/" %}
-[iac](tech/iac/)
+{% content-ref url="tech/iac.md" %}
+[iac.md](tech/iac.md)
 {% endcontent-ref %}
 
 {% content-ref url="tech/openstack.md" %}
