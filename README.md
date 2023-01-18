@@ -46,8 +46,8 @@ coverY: 0
 [openstack.md](tech/openstack.md)
 {% endcontent-ref %}
 
-{% content-ref url="tech/etc.-haproxy-mariadb.md" %}
-[etc.-haproxy-mariadb.md](tech/etc.-haproxy-mariadb.md)
+{% content-ref url="tech/etc.-haproxy-mariadb/" %}
+[etc.-haproxy-mariadb](tech/etc.-haproxy-mariadb/)
 {% endcontent-ref %}
 
 
