@@ -53,5 +53,5 @@
     * [Ansible Vault로 민감한 데이터 암호화하기](tech/iac/ansible/ansible-vault.md)
     * [( 메모 ) Ansible role base 구조 및 inventory 그룹핑 방법](tech/iac/ansible/ansible-role-base-inventory.md)
 * [🤔 OpenStack](tech/openstack.md)
-* [🚎 ETC. ( HAProxy, MariaDB ) ](tech/etc.-haproxy-mariadb/README.md)
+* [🚎 ETC. ( HAProxy, MariaDB ) ](tech/etc.-haproxy-mariadb.md)
   * [TEST1](tech/etc.-haproxy-mariadb/test1.md)
