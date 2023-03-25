@@ -1,3 +1,7 @@
+---
+description: 2022. 5. 21. 22:13
+---
+
 # Rados Block Device (RBD) 설치하기
 
 ceph을 openstack의 cinder와 같은 block stroage 서비스의 백엔드로 사용하기 위해서는 RBD를 구성해야 한다.\
@@ -31,7 +35,9 @@ default.rgw.control     4   32      0 B        8      0 B      0    262 GiB
 default.rgw.meta        5    8      0 B        0      0 B      0    262 GiB
 ```
 
-#### deploy 서버에서 ceph cli 사용하기
+
+
+## deploy 서버에서 ceph cli 사용하기
 
 사실 이 과정은 RBD 설치와 무관하기는 한데 편의성을 위해서 진행하였다.\
 deploy 서버에 ceph client를 설치하여 ceph 클러스터의 내용을 cli로 제어, 조회할 수 있게 한다.
@@ -80,7 +86,11 @@ root@deploy:/home/ceph-cluster# ceph -s
     pgs:     105 active+clean
 ```
 
-#### ceph.conf 설정하기
+
+
+
+
+## ceph.conf 설정하기
 
 pool 생성 전에 ceph.conf에 osd default 값 및 cache 설정을 하였다.\
 ceph.conf 샘플에 있는 주석을 읽어보니 osd pool default pg num 같은 경우는 다음과 같이 계산하는걸 권장한다고 한다.
@@ -108,7 +118,11 @@ rbd cache max dirty age = 1.0
 rbd cache writethrough until flush = true
 ```
 
-#### PG autoscaler Disable
+
+
+
+
+## PG autoscaler Disable
 
 PG를 자동으로 계산하여 분배하는 옵션이 켜져 있었다.\
 나는 pool 별로 사용률을 고려해서 분배하고 싶어서 이를 disable 했다.
@@ -150,16 +164,20 @@ default.rgw.control        0                 3.0        838.1G  0.0000          
 default.rgw.meta           0                 3.0        838.1G  0.0000                                  4.0      16              off
 ```
 
-#### RBD pool 생성하기
+
+
+
+
+## RBD pool 생성하기
 
 [https://docs.ceph.com/en/nautilus/rados/operations/pools/#create-a-pool](https://docs.ceph.com/en/nautilus/rados/operations/pools/#create-a-pool)\
 이제 본격적으로 RBD 설치를 시작한다. 다음 pool을 생성하고, pg\_num을 수동으로 지정해 주려고 한다.\
 각 pool이 하는 역할은 다음과 같다\
-\- volume pool : openstack cinder와 연동. 블록스토리지 및 블록스토리지 스냅샷을 저장\
-\- images pool : openstack glance와 연동. VM 생성을 위한 OS image에 해당한다.\
+\- **volume pool** : openstack cinder와 연동. 블록스토리지 및 블록스토리지 스냅샷을 저장\
+\- **images pool** : openstack glance와 연동. VM 생성을 위한 OS image에 해당한다.\
 &#x20;  !! 주의사항 ) ceph 이용해서 VM의 OS image 만들때는 QCOW2 보다는 raw 타입을 사용이 권장된다.\
-\- vms pool : openstack VM의 부팅 디스크를 저장한다. Havana 버전부터는 가상서버 부팅디스크가 cinder를 타지 않고    바로 ceph과 통신하여 생성된다. 유지보수 작업에서 번거로움을 덜고 live-migration 에도 이점이 있다고 한다.\
-\- backups pool : 블록 스토리지를 백업할 수 있는 cinder의 기능이 있고, 백업 내용을 저장하는 pool로 보인다.\
+\- **vms pool** : openstack VM의 부팅 디스크를 저장한다. Havana 버전부터는 가상서버 부팅디스크가 cinder를 타지 않고    바로 ceph과 통신하여 생성된다. 유지보수 작업에서 번거로움을 덜고 live-migration 에도 이점이 있다고 한다.\
+\- **backups pool** : 블록 스토리지를 백업할 수 있는 cinder의 기능이 있고, 백업 내용을 저장하는 pool로 보인다.\
 &#x20; 나는 아직 clnder backup 구현까지는 생각을 안하고 있지만 일단 pool은 생성했다.
 
 ```
@@ -173,7 +191,9 @@ root@deploy:/home/ceph-cluster# ceph osd pool create vms
 pool 'vms' created
 ```
 
-#### pg\_num 적용
+
+
+## pg\_num 적용
 
 사실 내가 맞게 한 것인지 잘 모르겠다..\
 [https://access.redhat.com/labs/cephpgc/](https://access.redhat.com/labs/cephpgc/) 여기서 osd 10개, replica 3으로 설정하고 필요한 pool들을 입력해서 계산해 보았다.
@@ -268,7 +288,9 @@ backups                12   32      0 B        0      0 B      0    262 GiB
 vms                    13   64      0 B        0      0 B      0    262 GiB
 ```
 
-#### RBD init
+
+
+## RBD init
 
 pool을 생성하면 어떤 application에서 사용할 것인지를 지정해야 한다. rbd block device 같은 경우는 다음과 같이 init 하여 이를 수행한다.
 
@@ -279,7 +301,9 @@ root@deploy:/home/ceph-cluster# rbd pool init backups
 root@deploy:/home/ceph-cluster# rbd pool init vms
 ```
 
-#### RBD object 생성 테스트
+
+
+## RBD object 생성 테스트
 
 이제 pool 까지 설정이 완료 되었으니 리소스가 잘 생성되는지 테스트 해 본다.\
 \--size의 인자로 들어가는 값의 단위는 MiB이다. 나는 1MiB 를 하나 생성해 보았다.
