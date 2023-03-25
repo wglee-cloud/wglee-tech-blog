@@ -2,7 +2,7 @@
 
 * [👋 Welcome to wglee's Blog](README.md)
 
-## 👩💻 Tech
+## 👩💻 👩💻 Tech
 
 * [✨ Linux](tech/linux/README.md)
   * [NTP](tech/linux/ntp.md)
@@ -43,7 +43,8 @@
   * [통신 장비 - 02. 데이터링크 계층 Bridge, Switch](tech/network/02.-bridge-switch.md)
   * [통신 장비 - 01. 물리계층 HUB](tech/network/01.-hub.md)
   * [Ethernet의 역사](tech/network/ethernet.md)
-* [🐳 Kubernetes](tech/kubernetes.md)
+* [🐳 Kubernetes](tech/kubernetes/README.md)
+  * [01. Pod\_쿠버네티스에서 컨테이너 실행하기](tech/kubernetes/01.-pod\_.md)
 * [🎯 Ceph](tech/ceph.md)
 * [🚀 IaC](tech/iac.md)
   * [Ansible](tech/iac/ansible/README.md)
@@ -53,5 +54,5 @@
     * [Ansible Vault로 민감한 데이터 암호화하기](tech/iac/ansible/ansible-vault.md)
     * [( 메모 ) Ansible role base 구조 및 inventory 그룹핑 방법](tech/iac/ansible/ansible-role-base-inventory.md)
 * [🤔 OpenStack](tech/openstack.md)
-* [🚎 ETC. ( HAProxy, MariaDB ) ](tech/etc.-haproxy-mariadb.md)
+* [🚎 ETC. ( HAProxy, MariaDB )](tech/etc.-haproxy-mariadb.md)
   * [TEST1](tech/etc.-haproxy-mariadb/test1.md)
