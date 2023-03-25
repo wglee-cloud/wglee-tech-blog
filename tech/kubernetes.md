@@ -1,5 +1,3 @@
 # 🐳 Kubernetes
 
-| Posts |
-| ----- |
-|       |
+<table><thead><tr><th>No.</th><th data-type="content-ref">Posts</th></tr></thead><tbody><tr><td>13</td><td><a href="kubernetes/loadbalancer.md">loadbalancer.md</a></td></tr><tr><td>12</td><td><a href="kubernetes/12.-accessing-to-pod-metadata-from-application.md">12.-accessing-to-pod-metadata-from-application.md</a></td></tr><tr><td>11</td><td><a href="kubernetes/11.-secret.md">11.-secret.md</a></td></tr><tr><td>10</td><td><a href="kubernetes/10.-configmap.md">10.-configmap.md</a></td></tr><tr><td>9</td><td><a href="kubernetes/09.-job-task.md">09.-job-task.md</a></td></tr><tr><td>8</td><td><a href="kubernetes/08.-daemonset.md">08.-daemonset.md</a></td></tr><tr><td>7</td><td><a href="kubernetes/07.-replicaset.md">07.-replicaset.md</a></td></tr><tr><td>6</td><td><a href="kubernetes/06.-liveness-probe.md">06.-liveness-probe.md</a></td></tr><tr><td>5</td><td><a href="kubernetes/05.-pod.md">05.-pod.md</a></td></tr><tr><td>4</td><td><a href="kubernetes/04.-namespace.md">04.-namespace.md</a></td></tr><tr><td>3</td><td><a href="kubernetes/03.-label-pod.md">03.-label-pod.md</a></td></tr><tr><td>2</td><td><a href="kubernetes/02.-yaml-json-pod.md">02.-yaml-json-pod.md</a></td></tr><tr><td>1</td><td><a href="kubernetes/01.-pod_.md">01.-pod_.md</a></td></tr></tbody></table>
