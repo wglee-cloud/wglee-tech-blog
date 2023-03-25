@@ -1,6 +1,6 @@
 # Remote client 에서 MariaDB 원격 접속 방법
 
-### Intro
+## Intro
 
 MariaDB에 원격 서버로부터의 접근을 허용하고, 사용자 계정에 따른 권한 부여를 하여 보안을 강화하도록 한다.
 
@@ -20,7 +20,9 @@ MariaDB 패키지를 설치하기 위해서는 아래 링크에서 yum repo를 �
 [root@wglee-db ~]# yum install mariadb-server
 ```
 
-### MariaDB-Server setup
+
+
+## MariaDB-Server setup
 
 db 서버에서 아래의 명령어로 root 패스워드를 초기화 한다.\
 해당 명령어는 shell script 기반으로 동작하며, 다음 항목들을 초기 설정할 수 있다.\
@@ -50,7 +52,9 @@ user=root
 password="[패스워드]"
 ```
 
-### MariaDB-Server - Create Database, User
+
+
+## MariaDB-Server - Create Database, User
 
 원격 서버에서 접근할 유저와, 해당 유저에게 접근 허용을 할 임의의 데이터베이스를 생성한다.
 
@@ -62,7 +66,9 @@ MariaDB [(none)]> CREATE USER  'wglee'@'localhost' IDENTIFIED BY '[패스워드]
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-### MariaDB-Server - Grant privileges to user
+
+
+## MariaDB-Server - Grant privileges to user
 
 원격에서 접근할 사용자 wglee에 대한 권한을 설정한다.\
 접근 허용할 데이터베이스, 원격지 주소 등을 허용 범위에 따라 다음과 같이 설정할 수 있다.
@@ -87,7 +93,9 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 MariaDB [(none)]> EXIT;
 ```
 
-### MariaDB-Client - Test Connection
+
+
+## MariaDB-Client - Test Connection
 
 client인 web 서버에서 wglee 계정으로 접속을 테스트 한다.\
 이때 client와 server 사이에 방화벽이 허용되어 있어야 한다.\
