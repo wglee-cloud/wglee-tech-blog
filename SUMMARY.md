@@ -44,7 +44,7 @@
   * [통신 장비 - 01. 물리계층 HUB](tech/network/01.-hub.md)
   * [Ethernet의 역사](tech/network/ethernet.md)
 * [🐳 Kubernetes](tech/kubernetes.md)
-  * [LoadBalancer)](tech/kubernetes/loadbalancer.md)
+  * [\[K8S\] Service (NodePort / ClusterIP / LoadBalancer)](tech/kubernetes/k8s-service-nodeport-clusterip-loadbalancer.md)
   * [12. Accessing to Pod metadata from application](tech/kubernetes/12.-accessing-to-pod-metadata-from-application.md)
   * [11. Secret](tech/kubernetes/11.-secret.md)
   * [10. ConfigMap](tech/kubernetes/10.-configmap.md)
