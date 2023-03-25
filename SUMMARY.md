@@ -2,7 +2,7 @@
 
 * [👋 Welcome to wglee's Blog](README.md)
 
-## 👩💻 👩💻 Tech
+## 🖥 Tech
 
 * [✨ Linux](tech/linux/README.md)
   * [NTP](tech/linux/ntp.md)
@@ -43,9 +43,25 @@
   * [통신 장비 - 02. 데이터링크 계층 Bridge, Switch](tech/network/02.-bridge-switch.md)
   * [통신 장비 - 01. 물리계층 HUB](tech/network/01.-hub.md)
   * [Ethernet의 역사](tech/network/ethernet.md)
-* [🐳 Kubernetes](tech/kubernetes/README.md)
+* [🐳 Kubernetes](tech/kubernetes.md)
+  * [LoadBalancer)](tech/kubernetes/loadbalancer.md)
+  * [12. Accessing to Pod metadata from application](tech/kubernetes/12.-accessing-to-pod-metadata-from-application.md)
+  * [11. Secret](tech/kubernetes/11.-secret.md)
+  * [10. ConfigMap](tech/kubernetes/10.-configmap.md)
+  * [09. Job으로 완료 가능한 단일 task 구현하기](tech/kubernetes/09.-job-task.md)
+  * [08. DaemonSet](tech/kubernetes/08.-daemonset.md)
+  * [07. ReplicaSet](tech/kubernetes/07.-replicaset.md)
+  * [06. liveness probe](tech/kubernetes/06.-liveness-probe.md)
+  * [05. Pod 중지, 제거](tech/kubernetes/05.-pod.md)
+  * [04. Namespace를 이용한 리소스 그룹화](tech/kubernetes/04.-namespace.md)
+  * [03. Label을 이용한 Pod 구성](tech/kubernetes/03.-label-pod.md)
+  * [02. YAML 또는 JSON 디스크립터로 Pod 생성하기](tech/kubernetes/02.-yaml-json-pod.md)
   * [01. Pod\_쿠버네티스에서 컨테이너 실행하기](tech/kubernetes/01.-pod\_.md)
-* [🎯 Ceph](tech/ceph.md)
+* [🎯 Ceph](tech/ceph/README.md)
+  * [Rados Block Device (RBD) 설치하기](tech/ceph/rados-block-device-rbd.md)
+  * [02. ceph cluster 배포하기](tech/ceph/02.-ceph-cluster.md)
+  * [01. 사전작업](tech/ceph/01..md)
+  * [Ceph 기본 동작 원리](tech/ceph/ceph.md)
 * [🚀 IaC](tech/iac.md)
   * [Ansible](tech/iac/ansible/README.md)
     * [Ansible Semaphore 설치 (CentOS 7)](tech/iac/ansible/ansible-semaphore-centos-7.md)
@@ -56,3 +72,9 @@
 * [🤔 OpenStack](tech/openstack.md)
 * [🚎 ETC. ( HAProxy, MariaDB )](tech/etc.-haproxy-mariadb.md)
   * [TEST1](tech/etc.-haproxy-mariadb/test1.md)
+  * [HAProxy Configuration](tech/etc.-haproxy-mariadb/haproxy-configuration.md)
+  * [Remote client 에서 MariaDB 원격 접속 방법](tech/etc.-haproxy-mariadb/remote-client-mariadb.md)
+
+## Drift
+
+* [Page 1](drift/page-1.md)

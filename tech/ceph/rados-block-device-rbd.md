@@ -1,0 +1,364 @@
+# Rados Block Device (RBD) 설치하기
+
+ceph을 openstack의 cinder와 같은 block stroage 서비스의 백엔드로 사용하기 위해서는 RBD를 구성해야 한다.\
+RBD(Rados Block Device)는 Ceph Block Device라고도 알러져 있다.\
+[https://docs.ceph.com/en/latest/rbd/rbd-openstack/](https://docs.ceph.com/en/latest/rbd/rbd-openstack/)
+
+작업하기에 앞서 이전에 구성한 ceph 클러스터의 상태가 HEALTH\_\_OK인 것을 확인하고 시작한다.\
+[https://greencloud33.tistory.com/45](https://greencloud33.tistory.com/45) 작업 후로 pool 및 disk 상태는 다음과 같다.
+
+```
+root@deploy:/home/ceph-cluster# ceph osd lspools
+1 device_health_metrics
+2 .rgw.root
+3 default.rgw.log
+4 default.rgw.control
+5 default.rgw.meta
+
+
+root@deploy:/home/ceph-cluster# ceph df
+--- RAW STORAGE ---
+CLASS  SIZE     AVAIL    USED     RAW USED  %RAW USED
+hdd    838 GiB  828 GiB  956 MiB   9.9 GiB       1.19
+TOTAL  838 GiB  828 GiB  956 MiB   9.9 GiB       1.19
+
+--- POOLS ---
+POOL                   ID  PGS  STORED   OBJECTS  USED     %USED  MAX AVAIL
+device_health_metrics   1    1      0 B        0      0 B      0    262 GiB
+.rgw.root               2   32  1.3 KiB        4  768 KiB      0    262 GiB
+default.rgw.log         3   32  3.4 KiB      207    6 MiB      0    262 GiB
+default.rgw.control     4   32      0 B        8      0 B      0    262 GiB
+default.rgw.meta        5    8      0 B        0      0 B      0    262 GiB
+```
+
+#### deploy 서버에서 ceph cli 사용하기
+
+사실 이 과정은 RBD 설치와 무관하기는 한데 편의성을 위해서 진행하였다.\
+deploy 서버에 ceph client를 설치하여 ceph 클러스터의 내용을 cli로 제어, 조회할 수 있게 한다.
+
+```
+root@deploy:/home/ceph-cluster# ceph-deploy install ceph-client
+```
+
+패키지만 설치하고 deploy 서버에서 ceph -s를 했을 때 오류가 난다.\
+ceph admin 계정으로 ceph cluster에 인증을 못받아서 그런 것으로, 에러에 나타나는 /etc/ceph 하위 경로에\
+ceph.admin.keyring을 복사해 준다.
+
+```
+root@deploy:/home/ceph-cluster# ceph -s
+2022-03-01T17:55:30.576+0900 7fa8edfb6700 -1 auth: unable to find a keyring on /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin,: (2) No such file or directory
+2022-03-01T17:55:30.576+0900 7fa8edfb6700 -1 AuthRegistry(0x7fa8e80590e0) no keyring found at /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin,, disabling cephx
+2022-03-01T17:55:30.576+0900 7fa8ecd54700 -1 auth: unable to find a keyring on /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin,: (2) No such file or directory
+2022-03-01T17:55:30.576+0900 7fa8ecd54700 -1 AuthRegistry(0x7fa8e805b698) no keyring found at /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin,, disabling cephx
+2022-03-01T17:55:30.576+0900 7fa8ecd54700 -1 auth: unable to find a keyring on /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin,: (2) No such file or directory
+2022-03-01T17:55:30.576+0900 7fa8ecd54700 -1 AuthRegistry(0x7fa8ecd53130) no keyring found at /etc/ceph/ceph.client.admin.keyring,/etc/ceph/ceph.keyring,/etc/ceph/keyring,/etc/ceph/keyring.bin,, disabling cephx
+[errno 2] RADOS object not found (error connecting to the cluster)
+
+root@deploy:/home/ceph-cluster# cp -a ceph.client.admin.keyring /etc/ceph
+```
+
+이제는 deploy 서버에서도 ceph 클러스터 정보를 조회할 수 있다.
+
+```
+root@deploy:/home/ceph-cluster# ceph -s
+  cluster:
+    id:     4ec23dde-416c-4a0b-8c6d-6d10a960b090
+    health: HEALTH_OK
+
+  services:
+    mon: 3 daemons, quorum wglee-ceph-001,wglee-ceph-002,wglee-ceph-003 (age 4d)
+    mgr: wglee-ceph-001(active, since 4d), standbys: wglee-ceph-002, wglee-ceph-003
+    osd: 9 osds: 9 up (since 4d), 9 in (since 4d)
+    rgw: 1 daemon active (wglee-ceph-001)
+
+  task status:
+
+  data:
+    pools:   5 pools, 105 pgs
+    objects: 187 objects, 4.7 KiB
+    usage:   9.2 GiB used, 829 GiB / 838 GiB avail
+    pgs:     105 active+clean
+```
+
+#### ceph.conf 설정하기
+
+pool 생성 전에 ceph.conf에 osd default 값 및 cache 설정을 하였다.\
+ceph.conf 샘플에 있는 주석을 읽어보니 osd pool default pg num 같은 경우는 다음과 같이 계산하는걸 권장한다고 한다.
+
+```
+(OSD 개수 * 100 ) / replica 수치
+```
+
+저 계산에 완전 똑같이 한건 아니지만 근사치로 320 으로 설정했다.\
+320은 PG calculator로 계산했을 때 나온 값이었다.
+
+```
+###config for ceph osds
+osd pool default size = 3
+osd pool default min size  = 2
+osd pool default pg num = 320
+osd pool default pgp num = 320
+
+[client]
+rbd cache = true
+rbd cache size = 33554432 # (32MiB)
+rbd cache max dirty = 20971520 # (20MiB)
+rbd cache target dirty = 10485760 # (10MiB)
+rbd cache max dirty age = 1.0
+rbd cache writethrough until flush = true
+```
+
+#### PG autoscaler Disable
+
+PG를 자동으로 계산하여 분배하는 옵션이 켜져 있었다.\
+나는 pool 별로 사용률을 고려해서 분배하고 싶어서 이를 disable 했다.
+
+```
+root@deploy:/home/ceph-cluster# ceph osd pool set device_health_metrics pg_autoscale_mode off
+set pool 1 pg_autoscale_mode to off
+root@deploy:/home/ceph-cluster# ceph osd pool set  .rgw.root  pg_autoscale_mode off
+set pool 2 pg_autoscale_mode to off
+root@deploy:/home/ceph-cluster# ceph osd pool set  default.rgw.log  pg_autoscale_mode off
+set pool 3 pg_autoscale_mode to off
+root@deploy:/home/ceph-cluster# ceph osd pool set  default.rgw.control  pg_autoscale_mode off
+set pool 4 pg_autoscale_mode to off
+root@deploy:/home/ceph-cluster# ceph osd pool set  default.rgw.meta  pg_autoscale_mode off
+set pool 5 pg_autoscale_mode to off
+```
+
+앞으로 생성될 pool 에 대해서도 해당 옵션을 끄고 싶으면 다음과 같이 하면 된다.
+
+```
+root@deploy:/home/ceph-cluster# ceph config set global osd_pool_default_pg_autoscale_mode off
+
+root@deploy:/home/ceph-cluster# ceph config dump
+WHO     MASK  LEVEL     OPTION                                 VALUE  RO
+global        advanced  osd_pool_default_pg_autoscale_mode     off
+  mon         advanced  auth_allow_insecure_global_id_reclaim  false
+  mon         advanced  mon_allow_pool_delete                  false
+```
+
+모두 off 된 것을 볼 수 있다.
+
+```
+root@deploy:/home/ceph-cluster# ceph osd pool autoscale-status
+POOL                     SIZE  TARGET SIZE  RATE  RAW CAPACITY   RATIO  TARGET RATIO  EFFECTIVE RATIO  BIAS  PG_NUM  NEW PG_NUM  AUTOSCALE
+device_health_metrics      0                 3.0        838.1G  0.0000                                  1.0       1              off
+.rgw.root               1289                 3.0        838.1G  0.0000                                  1.0      16              off
+default.rgw.log         3520                 3.0        838.1G  0.0000                                  1.0      16              off
+default.rgw.control        0                 3.0        838.1G  0.0000                                  1.0      16              off
+default.rgw.meta           0                 3.0        838.1G  0.0000                                  4.0      16              off
+```
+
+#### RBD pool 생성하기
+
+[https://docs.ceph.com/en/nautilus/rados/operations/pools/#create-a-pool](https://docs.ceph.com/en/nautilus/rados/operations/pools/#create-a-pool)\
+이제 본격적으로 RBD 설치를 시작한다. 다음 pool을 생성하고, pg\_num을 수동으로 지정해 주려고 한다.\
+각 pool이 하는 역할은 다음과 같다\
+\- volume pool : openstack cinder와 연동. 블록스토리지 및 블록스토리지 스냅샷을 저장\
+\- images pool : openstack glance와 연동. VM 생성을 위한 OS image에 해당한다.\
+&#x20;  !! 주의사항 ) ceph 이용해서 VM의 OS image 만들때는 QCOW2 보다는 raw 타입을 사용이 권장된다.\
+\- vms pool : openstack VM의 부팅 디스크를 저장한다. Havana 버전부터는 가상서버 부팅디스크가 cinder를 타지 않고    바로 ceph과 통신하여 생성된다. 유지보수 작업에서 번거로움을 덜고 live-migration 에도 이점이 있다고 한다.\
+\- backups pool : 블록 스토리지를 백업할 수 있는 cinder의 기능이 있고, 백업 내용을 저장하는 pool로 보인다.\
+&#x20; 나는 아직 clnder backup 구현까지는 생각을 안하고 있지만 일단 pool은 생성했다.
+
+```
+root@deploy:/home/ceph-cluster# ceph osd pool create volumes
+pool 'volumes' created
+root@deploy:/home/ceph-cluster# ceph osd pool create images
+pool 'images' created
+root@deploy:/home/ceph-cluster# ceph osd pool create backups
+pool 'backups' created
+root@deploy:/home/ceph-cluster# ceph osd pool create vms
+pool 'vms' created
+```
+
+#### pg\_num 적용
+
+사실 내가 맞게 한 것인지 잘 모르겠다..\
+[https://access.redhat.com/labs/cephpgc/](https://access.redhat.com/labs/cephpgc/) 여기서 osd 10개, replica 3으로 설정하고 필요한 pool들을 입력해서 계산해 보았다.
+
+<figure><img src="https://blog.kakaocdn.net/dn/H85X4/btrCMXrZehj/B5ZwDBBo2wMf0AslOX3gEK/img.png" alt=""><figcaption></figcaption></figure>
+
+\
+이 사진에서 계산된 수치로 적용했다.&#x20;
+
+```
+root@deploy:/home/ceph-cluster# ceph osd pool set device_health_metrics pg_num 16
+root@deploy:/home/ceph-cluster# ceph osd pool set device_health_metrics pgp_num 16
+set pool 1 pgp_num to 16
+root@deploy:/home/ceph-cluster# ceph osd pool get .rgw.root pgp_num
+pgp_num: 16
+root@deploy:/home/ceph-cluster# ceph osd pool get .rgw.root pg_num
+pg_num: 16
+root@deploy:/home/ceph-cluster# ceph osd pool set .rgw.root pg_num 16
+root@deploy:/home/ceph-cluster# ceph osd pool set .rgw.root pgp_num 16
+set pool 2 pgp_num to 16
+root@deploy:/home/ceph-cluster# ceph osd pool set default.rgw.log pg_num 16
+root@deploy:/home/ceph-cluster# ceph osd pool set default.rgw.log pgp_num 16
+set pool 3 pgp_num to 16
+root@deploy:/home/ceph-cluster# ceph osd pool set default.rgw.control pg_num 16
+root@deploy:/home/ceph-cluster# ceph osd pool set default.rgw.control pgp_num 16
+set pool 4 pgp_num to 16
+root@deploy:/home/ceph-cluster# ceph osd pool set default.rgw.meta pg_num 16
+root@deploy:/home/ceph-cluster# ceph osd pool set default.rgw.meta pgp_num 16
+set pool 5 pgp_num to 16
+root@deploy:/home/ceph-cluster# ceph osd pool set backups pg_num 32
+root@deploy:/home/ceph-cluster# ceph osd pool set backups pgp_num 32
+set pool 12 pgp_num to 32
+root@deploy:/home/ceph-cluster# ceph osd pool set volumes pg_num 128
+set pool 10 pg_num to 128
+root@deploy:/home/ceph-cluster# ceph osd pool set volumes pgp_num 128
+set pool 10 pgp_num to 128
+root@deploy:/home/ceph-cluster# ceph osd pool set images pg_num 16
+set pool 11 pg_num to 16
+root@deploy:/home/ceph-cluster# ceph osd pool set images pgp_num 16
+set pool 11 pgp_num to 16
+root@deploy:/home/ceph-cluster# ceph osd pool set vms pg_num 64
+set pool 13 pg_num to 64
+root@deploy:/home/ceph-cluster# ceph osd pool set vms pgp_num 64
+set pool 13 pgp_num to 64
+```
+
+ceph status를 watch 명령으로 확인하여 모든 PG가 active+clean 될 때까지 기다린다.\
+320 개의 PG가 모두 active+clean 되었다.
+
+```
+Every 2.0s: ceph -s                                                                                    deploy: Sat May 21 17:36:31 2022
+
+  cluster:
+    id:     4ec23dde-416c-4a0b-8c6d-6d10a960b090
+    health: HEALTH_OK
+
+  services:
+    mon: 3 daemons, quorum wglee-ceph-001,wglee-ceph-002,wglee-ceph-003 (age 3h)
+    mgr: wglee-ceph-002(active, since 3h), standbys: wglee-ceph-001, wglee-ceph-003
+    osd: 9 osds: 9 up (since 3h), 9 in (since 2M)
+    rgw: 1 daemon active (wglee-ceph-001)
+
+  task status:
+
+  data:
+    pools:   9 pools, 320 pgs
+    objects: 219 objects, 4.7 KiB
+    usage:   10 GiB used, 828 GiB / 838 GiB avail
+    pgs:     320 active+clean
+```
+
+ceph df 결과. PG가 내가 설정한 대로 분배된 것을 볼 수 있다.
+
+```
+
+root@deploy:/home/ceph-cluster# ceph df
+--- RAW STORAGE ---
+CLASS  SIZE     AVAIL    USED     RAW USED  %RAW USED
+hdd    838 GiB  828 GiB  1.1 GiB    10 GiB       1.20
+TOTAL  838 GiB  828 GiB  1.1 GiB    10 GiB       1.20
+
+--- POOLS ---
+POOL                   ID  PGS  STORED   OBJECTS  USED     %USED  MAX AVAIL
+device_health_metrics   1   16      0 B        0      0 B      0    262 GiB
+.rgw.root               2   16  1.3 KiB        4  768 KiB      0    262 GiB
+default.rgw.log         3   16  3.4 KiB      207    6 MiB      0    262 GiB
+default.rgw.control     4   16      0 B        8      0 B      0    262 GiB
+default.rgw.meta        5   16      0 B        0      0 B      0    262 GiB
+volumes                10  128      0 B        0      0 B      0    262 GiB
+images                 11   16      0 B        0      0 B      0    262 GiB
+backups                12   32      0 B        0      0 B      0    262 GiB
+vms                    13   64      0 B        0      0 B      0    262 GiB
+```
+
+#### RBD init
+
+pool을 생성하면 어떤 application에서 사용할 것인지를 지정해야 한다. rbd block device 같은 경우는 다음과 같이 init 하여 이를 수행한다.
+
+```
+root@deploy:/home/ceph-cluster# rbd pool init volumes
+root@deploy:/home/ceph-cluster# rbd pool init images
+root@deploy:/home/ceph-cluster# rbd pool init backups
+root@deploy:/home/ceph-cluster# rbd pool init vms
+```
+
+#### RBD object 생성 테스트
+
+이제 pool 까지 설정이 완료 되었으니 리소스가 잘 생성되는지 테스트 해 본다.\
+\--size의 인자로 들어가는 값의 단위는 MiB이다. 나는 1MiB 를 하나 생성해 보았다.
+
+```
+root@deploy:/home/ceph-cluster# rbd create --size 1 volumes/wglee-test
+```
+
+다음과 같이 wglee-test 라는 object가 volumes pool에 생성되었다.\
+volumes pool의 STORED 데이터도 70B로 증가했다.
+
+```
+root@deploy:/home/ceph-cluster# rbd ls volumes
+wglee-test
+
+root@deploy:/home/ceph-cluster# rbd info volumes/wglee-test
+rbd image 'wglee-test':
+        size 1 MiB in 1 objects
+        order 22 (4 MiB objects)
+        snapshot_count: 0
+        id: 6a5831cfe8f3
+        block_name_prefix: rbd_data.6a5831cfe8f3
+        format: 2
+        features: layering, exclusive-lock, object-map, fast-diff, deep-flatten
+        op_features:
+        flags:
+        create_timestamp: Sat May 21 17:50:32 2022
+        access_timestamp: Sat May 21 17:50:32 2022
+        modify_timestamp: Sat May 21 17:50:32 2022
+
+root@deploy:/home/ceph-cluster# ceph df
+...
+--- POOLS ---
+POOL                   ID  PGS  STORED   OBJECTS  USED     %USED  MAX AVAIL
+...
+volumes                10  128     70 B        5  576 KiB      0    262 GiB
+images                 11   16     19 B        1  192 KiB      0    262 GiB
+backups                12   32     19 B        1  192 KiB      0    262 GiB
+vms                    13   64     19 B        1  192 KiB      0    262 GiB
+```
+
+rbd resize로 크기를 변경해 본다.
+
+```
+root@deploy:/home/ceph-cluster# rbd resize --size 5 volumes/wglee-test
+Resizing image: 100% complete...done.
+
+root@deploy:/home/ceph-cluster# rbd info volumes/wglee-test
+rbd image 'wglee-test':
+        size 5 MiB in 2 objects
+        order 22 (4 MiB objects)
+        snapshot_count: 0
+        id: 6a5831cfe8f3
+        block_name_prefix: rbd_data.6a5831cfe8f3
+        format: 2
+        features: layering, exclusive-lock, object-map, fast-diff, deep-flatten
+        op_features:
+        flags:
+        create_timestamp: Sat May 21 17:50:32 2022
+        access_timestamp: Sat May 21 17:50:32 2022
+        modify_timestamp: Sat May 21 17:50:32 2022
+```
+
+테스트용으로 생성한거 삭제하기\
+삭제 한 후에 df 했을 때 volumes pool 용량도 줄어들었다. 잘 되는 듯 하다! 😉😃
+
+```
+root@deploy:/home/ceph-cluster# rbd rm volumes/wglee-test
+Removing image: 100% complete...done.
+
+root@deploy:/home/ceph-cluster# ceph df
+--- RAW STORAGE ---
+CLASS  SIZE     AVAIL    USED     RAW USED  %RAW USED
+hdd    838 GiB  828 GiB  1.1 GiB    10 GiB       1.21
+TOTAL  838 GiB  828 GiB  1.1 GiB    10 GiB       1.21
+
+--- POOLS ---
+POOL                   ID  PGS  STORED   OBJECTS  USED     %USED  MAX AVAIL
+...
+volumes                10  128     19 B        3  192 KiB      0    262 GiB
+...
+```

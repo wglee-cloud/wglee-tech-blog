@@ -30,12 +30,12 @@ coverY: 0
 [network](tech/network/)
 {% endcontent-ref %}
 
-{% content-ref url="tech/kubernetes/" %}
-[kubernetes](tech/kubernetes/)
+{% content-ref url="tech/kubernetes.md" %}
+[kubernetes.md](tech/kubernetes.md)
 {% endcontent-ref %}
 
-{% content-ref url="tech/ceph.md" %}
-[ceph.md](tech/ceph.md)
+{% content-ref url="tech/ceph/" %}
+[ceph](tech/ceph/)
 {% endcontent-ref %}
 
 {% content-ref url="tech/iac.md" %}
