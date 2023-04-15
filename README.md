@@ -40,8 +40,8 @@ coverY: 0
 [iac.md](tech/iac.md)
 {% endcontent-ref %}
 
-{% content-ref url="tech/openstack.md" %}
-[openstack.md](tech/openstack.md)
+{% content-ref url="tech/openstack/" %}
+[openstack](tech/openstack/)
 {% endcontent-ref %}
 
 {% content-ref url="tech/etc.-haproxy-mariadb.md" %}

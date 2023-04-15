@@ -42,7 +42,7 @@ swapon 의 man 페이지를 보면 다음과 같은 문구가 있다.
 
 {% hint style="info" %}
 **Files with holes**\
-****The swap file implementation in the kernel expects to be able to write to the file directly, without the assistance of the filesystem. This is a problem on files with holes or on copy- on-write files on filesystems like Btrfs. Commands like cp(1) or truncate(1) create files with holes. These files will be rejected by swapon. **Preallocated files created by fallocate(1) may be interpreted as files with holes too depending of the filesystem.** Preallocated swap files are supported on XFS since Linux 4.18. **The most portable solution to create a swap file is to use dd(1) and /dev/zero**.
+The swap file implementation in the kernel expects to be able to write to the file directly, without the assistance of the filesystem. This is a problem on files with holes or on copy- on-write files on filesystems like Btrfs. Commands like cp(1) or truncate(1) create files with holes. These files will be rejected by swapon. **Preallocated files created by fallocate(1) may be interpreted as files with holes too depending of the filesystem.** Preallocated swap files are supported on XFS since Linux 4.18. **The most portable solution to create a swap file is to use dd(1) and /dev/zero**.
 {% endhint %}
 
 
@@ -149,7 +149,7 @@ Change: 2022-08-29 22:19:20.010679119 +0900
 
 
 **( 추가 )**\
-****hexdump 라는걸 이용해서 파일의 내용을 16진수로 확인해 보았다.\
+hexdump 라는걸 이용해서 파일의 내용을 16진수로 확인해 보았다.\
 sparse\_file을 head로 봤을 때는 zero (hole) 로 채워져 있고\
 tail 로 봤을 때 문자열이 들어가 있다.\
 나는 sparse 파일에 데이터 쓰기가 일어나면 zero로 채워진 hole 영역이 데이터로 치환 되는 줄 알았는데\

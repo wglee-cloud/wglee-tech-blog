@@ -28,10 +28,10 @@ NAT는 IP를 참조하는 L3 계층에 해당한다.\
 ## NAT의 목적
 
 1. **공인 IP 절약**\
-   ****IPv4 공인IP는 한정되어 있다. 때문에 회사/집/학교 등에 있는 모든 PC에 공인 IP를 부여하면 가격도 비싸고 빠르게 고갈될 위험이 높다.\
+   IPv4 공인IP는 한정되어 있다. 때문에 회사/집/학교 등에 있는 모든 PC에 공인 IP를 부여하면 가격도 비싸고 빠르게 고갈될 위험이 높다.\
    회사 내부 PC 들에는 사설 IP를 부여하고, 인터넷 접근 시 하나의 특정 공인 IP로 나가도록 NAT 설정하면 공인 IP를 절약할 수 있다.
 2. **보안**\
-   ****외부 인터넷에서 해킹등의 공격 받는 것을 방지하기 위해 보안이 필요한 단말기들을 사설로 운영하여 인터넷에서 직접적으로 접근하지 못하도록 한다.
+   외부 인터넷에서 해킹등의 공격 받는 것을 방지하기 위해 보안이 필요한 단말기들을 사설로 운영하여 인터넷에서 직접적으로 접근하지 못하도록 한다.
 
 
 
@@ -47,8 +47,8 @@ wglee-nat 서버의 공인아이피로 wglee-server-001,002 웹서버의 index.h
 패킷의 header에 있는 source ip, dest ip를 변경할 수 있게 한다.\
 nat 테이블에는 다음과 같은 체인이 있다.
 
-* _**PREROUTING**_** ** : DNAT (Destination NAT). header의 dest ip 를 변경한다. 외부 -> 내부
-* _**POSTROUTING**_** ** : SNAT (Source NAT) : header의 source ip 를 변경. 내부 -> 외부
+* _**PREROUTING**_ : DNAT (Destination NAT). header의 dest ip 를 변경한다. 외부 -> 내부
+* _**POSTROUTING**_ : SNAT (Source NAT) : header의 source ip 를 변경. 내부 -> 외부
 
 
 

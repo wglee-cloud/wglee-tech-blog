@@ -31,7 +31,7 @@ RHEL8 부터는 pam 파일을 직접적으로 수정하는 것은 권장 되지 
 
 그 중에서도 여러 application 에서 공통적으로 쓰이는 모듈은 system-auth, password-auth 에 설정되어 있다.
 
-_**system-auth**_** ** : 시스템 계정들에 대한 local authentication 의 설정을 담당한다.\
+_**system-auth**_ : 시스템 계정들에 대한 local authentication 의 설정을 담당한다.\
 _**password-auth**_ : ssh, vsftpd 같이 원격에서 접속하는 계정에 대한 인증을 담당한다.
 
 system-auth 와 password-auth 파일은 cron, sshd와 같은 pam 설정 파일에서 용도에 맞게 include 되어 사용 된다.

@@ -25,10 +25,10 @@ CentOS 7.6 에서 system 계정으로 예약된 uid는 0\~199 이다.\
 일반 계정의 umask 는 002, system 계정의 umask 는 022 가 된다.
 
 * **umask 002 (일반계정)**\
-  ****- Directory 기본 permission은 777-002 = 775 (rwx rwx r-x)\
+  \- Directory 기본 permission은 777-002 = 775 (rwx rwx r-x)\
   \- File 기본 permission은 666-002 = 664 (rw- rw- r--)
 * **umask 022 (시스템 계정)**\
-  ****- Directory 기본 permission은 777-022 = 755 (rwx r-x r-x)\
+  \- Directory 기본 permission은 777-022 = 755 (rwx r-x r-x)\
   \- File 기본 permission은 666-022 = 644 (r-x r-- r–)
 
 non-login shell 에 대한 umask 는 /etc/bashrc 에서 설정되고, login shell 에 대한 umask 는 /etc/profile 에서 설정된다.

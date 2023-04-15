@@ -8,7 +8,7 @@ description: Written on 2021. 9. 1. 03:07
 
 LVM(Logical Volume Manager)는 리눅스의 저장 공간을 효율적이고 유연하게 관리하기 위한 커널의 한 부분이다.
 
-&#x20;****&#x20;
+&#x20;
 
 ## LVM vs. 일반 disk partitioning
 
@@ -17,7 +17,7 @@ LVM이 아닌 기존 방식의 경우, 하드 디스크를 파티셔닝 한 후 
 LVM은 파티션 대신에 volume이라는 단위로 저장 장치를 다룬다.\
 스토리지의 확장,변경에 유연하며, 크기를 변경할 때 기존 데이터의 이전이 필요 없다.
 
-&#x20;****&#x20;
+&#x20;
 
 ## LVM 사용의 장점
 
@@ -26,7 +26,7 @@ LVM은 파티션 대신에 volume이라는 단위로 저장 장치를 다룬다.
 * 편의에 따른 장치 이름 지정
 * disk striping, mirror volume등을 제공
 
-&#x20;****&#x20;
+&#x20;
 
 ## LVM 관련 용어 및 구성
 
@@ -61,7 +61,7 @@ LVM은 파티션 대신에 volume이라는 단위로 저장 장치를 다룬다.
 
 간단한 실습을 진행해 보자!
 
-&#x20;****&#x20;
+&#x20;
 
 ## LVM 구성하기
 
@@ -92,7 +92,7 @@ Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
 ```
 
-&#x20;****&#x20;
+&#x20;
 
 ### lvm package 설치
 
@@ -156,7 +156,7 @@ Allocated PE          0
 PV UUID               MHxcc6-RJSz-khM2-0V3L-g1Ia-hJb3-MF6rfJ
 ```
 
-&#x20;****&#x20;
+&#x20;
 
 ### VG 만들기
 
@@ -220,7 +220,7 @@ VG1의 사이즈가 20GB인 것을 볼 수 있다. /etc/vdb와 /etc/vdc가 논�
       VG UUID               It5WRf-7NyL-fjYi-2Ilc-ubF6-6HaJ-AuPnkU
 ```
 
-&#x20;****&#x20;
+&#x20;
 
 ### LV 만들기
 
@@ -278,7 +278,7 @@ lvcreate 명령어로 LV를 생성한다. vg1의 리소스를 wglv\_1과 wglv\_2
       Block device           252:1
 ```
 
-&#x20;****&#x20;
+&#x20;&#x20;
 
 ### 파일 시스템  생성 및 Mount
 
@@ -368,7 +368,7 @@ mount point에 마운트
 
 물론 재부팅 시에도 마운트 상태를 유지하려면 fstab에 정보를 등록해야 한다.
 
-&#x20;****&#x20;
+&#x20;
 
 ## **참고 문서**
 

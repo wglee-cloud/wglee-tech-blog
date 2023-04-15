@@ -14,8 +14,8 @@ description: Written on 2022. 3. 1. 14:52
 
 {% hint style="info" %}
 **Swap Partition과 Swap File의 차이점?**\
-****\
-******A swap partition** is just what its name implies—a standard disk partition that is designated as swap space by the mkswap command.
+\
+**A swap partition** is just what its name implies—a standard disk partition that is designated as swap space by the mkswap command.
 
 **A swap file** can be used if there is no free disk space in which to create a new swap partition or space in a volume groupwhere a logical volume can be created for swap space. This is just a regular file that is created and preallocated to a specified size.Then the mkswap command is run to configure it as swap space. I don’t recommend using a file for swap space unless absolutely necessary.
 
@@ -115,7 +115,7 @@ vdc          253:32   0   10G  0 disk
 
 {% hint style="info" %}
 **daemon-reload** \
-****중간에 /etc/fstab을 수정한 다음에 daemon-reload를 하였다. restart 등과 어떤 차이가 있는지 알아보자.
+중간에 /etc/fstab을 수정한 다음에 daemon-reload를 하였다. restart 등과 어떤 차이가 있는지 알아보자.
 
 " Reload systemd manager configuration. This will rerun all generators (see systemd.generator(7)), reload all unit files, and recreate the entire dependency tree. While the daemon is being reloaded, all sockets systemd listens on behalf of user configuration will stay accessible. This command should not be confused with the reload command. (daemon-reload won't reload/restart the services themselves, just makes systemd aware of the new configuration) "
 

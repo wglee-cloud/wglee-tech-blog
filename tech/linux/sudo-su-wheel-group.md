@@ -80,7 +80,7 @@ testuser is not in the sudoers file.  This incident will be reported.
 When you want to run a command that requires root rights, Linux checks your username against the sudoers file. This happens when you type the command “sudo”. If it determines, that your username is not on the list, you cannot run the command/program logged in as that user.
 {% endhint %}
 
-****
+
 
 ### **sudo -i  / sudo -s**
 
