@@ -1,5 +1,2 @@
 # 🤔 OpenStack
 
-| Posts |
-| ----- |
-|       |
