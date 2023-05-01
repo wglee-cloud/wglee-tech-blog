@@ -72,6 +72,7 @@
   * [( 메모 ) Ansible role base 구조 및 inventory 그룹핑 방법](tech/iac/ansible-role-base-inventory.md)
 * [🤔 OpenStack](tech/openstack/README.md)
   * [Contribution](tech/openstack/contribution.md)
+  * [How Nova instance retrieves Metadata in OpenStack?](tech/openstack/how-nova-instance-retrieves-metadata-in-openstack.md)
 * [👀 Monitoring](tech/monitoring.md)
 * [🚎 ETC. ( HAProxy, MariaDB.. )](tech/etc.-haproxy-mariadb.md)
   * [HAProxy Configuration](tech/etc.-haproxy-mariadb/haproxy-configuration.md)
