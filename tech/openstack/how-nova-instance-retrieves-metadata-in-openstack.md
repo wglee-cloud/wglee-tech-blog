@@ -322,7 +322,7 @@ wireshark로 패킷을 상세하게 보면 다음과 같이 neutron-metadata-age
 * X-Tenant-ID
 * X-Forwarded-For
 
-<figure><img src="../../.gitbook/assets/image2023-3-26_16-59-9.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image2023-3-26_16-14-37 (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -330,12 +330,17 @@ nova\_metadata에서 받은 메타데이터 내용이 wglee-compute-001인 20.20
 
 실제로 패킷의 data를 보면 반환되는 meatadata 값들이 확인된다.
 
-<figure><img src="../../.gitbook/assets/image2023-3-26_16-14-37.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image2023-3-26_16-59-9.png" alt=""><figcaption></figcaption></figure>
+
+
+
+
 
 
 
 ## <mark style="color:green;">References</mark>
 
-[OpenStack Docs: Metadata](https://docs.openstack.org/nova/victoria/user/metadata.html#metadata-service)
+{% embed url="https://docs.openstack.org/nova/victoria/user/metadata.html" %}
 
-[https://docs.openstack.org/nova/victoria/admin/vendordata.html](https://docs.openstack.org/nova/victoria/admin/vendordata.html)
+{% embed url="https://docs.openstack.org/nova/victoria/admin/vendordata.html" %}
+
