@@ -313,6 +313,8 @@ tcpdump: listening on ens4, link-type EN10MB (Ethernet), capture size 262144 byt
 10 packets received by filter
 ```
 
+
+
 wireshark로 패킷을 상세하게 보면 다음과 같이 neutron-metadata-agent에서 nova로 보낸 요청의 Http request header 들을 확인할 수 있다.
 
 인스턴스에서 Nova-api 로 요청을 보낼 때 neutron metadata agent 는 다음과 같은 HTTP Header를 붙여서 넘긴다.
@@ -336,9 +338,7 @@ nova\_metadata에서 받은 메타데이터 내용이 wglee-compute-001인 20.20
 
 
 
-
-
-## <mark style="color:green;">References</mark>
+## <mark style="color:blue;">References</mark>
 
 {% embed url="https://docs.openstack.org/nova/victoria/user/metadata.html" %}
 
