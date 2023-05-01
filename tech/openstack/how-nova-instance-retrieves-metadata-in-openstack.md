@@ -1,14 +1,12 @@
 # How Nova instance retrieves Metadata in OpenStack?
 
-## How Nova instance retrieves Metadata in OpenStack?
-
 {% hint style="info" %}
 본 게시글은 victoria 버전 기준으로 작성되었습니다.
 {% endhint %}
 
 
 
-## OpenStack Metadata?
+## <mark style="color:blue;">OpenStack Metadata?</mark>
 
 OpenStack에서 인스턴스는 부팅과정에서 cloud-init을 이용해 metadata server로부터 인스턴스의 다음과 같은 정보들을 제공 받는다.
 
@@ -18,29 +16,6 @@ OpenStack에서 인스턴스는 부팅과정에서 cloud-init을 이용해 metad
 * cloud-init script
 * user-data
 * Static Routing 정보
-
-
-
-### Types of metadata
-
-metadata는 사용 주체에 따라 세 가지 타입으로 나뉘어진다.
-
-**User provided data**
-
-* 인스턴스를 생성하는 사용자의 설정에 의해 생성되는 metadata
-* ex. ssh public key, user data 등
-
-**Nova provided data**
-
-* Nova 프로젝트가 제체적으로 인스턴스에 전달하는 metadata
-* Nova는 OpenStack metadata API와 AWS EC2와 호환되는 metadata를 모두 제공한다.
-* 인스턴스 hostname, 인스턴스의 availability zone 정보 등
-
-**Deployer provided data**
-
-* 인스턴스를 제공하는 vendor에 대한 metadata
-
-
 
 가상서버에서 metadata를 받아오는데 사용하는 169.254.169.254 아이피로 curl을 하여 반환받은 metadata를 볼 수 있다.
 
@@ -55,6 +30,32 @@ ubuntu@dvr3-demo12:~$ route | grep 169
 ```
 
 
+
+### Types of metadata
+
+metadata는 사용 주체에 따라 세 가지 타입으로 나뉘어진다.
+
+**User provided data**
+
+인스턴스를 생성하는 사용자의 설정에 의해 생성되는 metadata를 의미한다.&#x20;
+
+ex. ssh public key, user data 등
+
+**Nova provided data**
+
+Nova 프로젝트가 제체적으로 인스턴스에 전달하는 metadata를 의미한다.&#x20;
+
+Nova는 OpenStack metadata API와 AWS EC2와 호환되는 metadata를 모두 제공한다.
+
+ex. 인스턴스 hostname, 인스턴스의 availability zone 정보 등
+
+**Deployer provided data**
+
+인스턴스를 제공하는 vendor에 대한 metadata
+
+
+
+### How to view metadata on a nova Instance
 
 **openstack metadata API**&#x20;
 
@@ -117,7 +118,7 @@ dvr3-demo12.novalocal
 
 
 
-## How it works?
+## <mark style="color:blue;">How it works?</mark>
 
 결론부터 이야기 하자면, 인스턴스는 link-local ip인 169.254.169.254를 통해 neutron metadata server에 HTTP 요청을 보낸다.
 
@@ -185,7 +186,7 @@ metadata_proxy_shared_secret = [패스워드]
 
 
 
-### Retrieving metadata via neutron metadata agent
+### Metadata retrieving process
 
 인스턴스가 metadata를 받아올 때 사용하는 169.254.169.254 아이피는 도착지의 실체가 있는 아이피가 아니다. neutron-metadata-agent가 올라간 노드의 dhcp 네임스페이스에서 169.254.169.254 아이피의 80 포트로 요청을 받으면, tanent별 동작하는 haproxy 프로세스에 의해 nova-api 쪽으로 포워딩된다.
 
@@ -299,7 +300,9 @@ metadata_proxy_shared_secret = [패스워드]
 
 
 
-## Packet Verification
+
+
+## <mark style="color:blue;">Packet Verification</mark>
 
 실제로 metadata가 반환 되는 모습을 보기 위해 vip가 있는 controller 노드에서 vip의 8775포트로 들어오는 패킷 덤프를 뜬다.
 
@@ -331,7 +334,7 @@ nova\_metadata에서 받은 메타데이터 내용이 wglee-compute-001인 20.20
 
 
 
-### References
+## <mark style="color:green;">References</mark>
 
 [OpenStack Docs: Metadata](https://docs.openstack.org/nova/victoria/user/metadata.html#metadata-service)
 
