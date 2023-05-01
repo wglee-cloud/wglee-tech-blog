@@ -1,38 +1,50 @@
 # How Nova instance retrieves Metadata in OpenStack?
 
+## How Nova instance retrieves Metadata in OpenStack?
+
 {% hint style="info" %}
-본 게시글은 victoria 버전 기준으로 작성되었습니다.&#x20;
+본 게시글은 victoria 버전 기준으로 작성되었습니다.
 {% endhint %}
 
 
-# OpenStack Metadata?
-OpenStack에서 인스턴스는 부팅과정에서 cloud-init을 이용해 metadata server로부터 인스턴스의 다음과 같은 정보들을 제공 받는다. 
-- 공인 아이피
-- hostname
-- SSH public key
-- cloud-init script
-- user-data
-- Static Routing 정보
+
+## OpenStack Metadata?
+
+OpenStack에서 인스턴스는 부팅과정에서 cloud-init을 이용해 metadata server로부터 인스턴스의 다음과 같은 정보들을 제공 받는다.
+
+* 공인 아이피
+* hostname
+* SSH public key
+* cloud-init script
+* user-data
+* Static Routing 정보
+
 
 
 ### Types of metadata
-metadata는 사용 주체에 따라 세 가지 타입으로 나뉘어진다. 
+
+metadata는 사용 주체에 따라 세 가지 타입으로 나뉘어진다.
 
 **User provided data**
-- 인스턴스를 생성하는 사용자의 설정에 의해 생성되는 metadata
-- ex. ssh public key, user data 등
+
+* 인스턴스를 생성하는 사용자의 설정에 의해 생성되는 metadata
+* ex. ssh public key, user data 등
 
 **Nova provided data**
-- Nova 프로젝트가 제체적으로 인스턴스에 전달하는 metadata
-- Nova는 OpenStack metadata API와 AWS EC2와 호환되는 metadata를 모두 제공한다.
-- 인스턴스 hostname, 인스턴스의 availability zone 정보 등
+
+* Nova 프로젝트가 제체적으로 인스턴스에 전달하는 metadata
+* Nova는 OpenStack metadata API와 AWS EC2와 호환되는 metadata를 모두 제공한다.
+* 인스턴스 hostname, 인스턴스의 availability zone 정보 등
 
 **Deployer provided data**
-- 인스턴스를 제공하는 vendor에 대한 metadata
+
+* 인스턴스를 제공하는 vendor에 대한 metadata
 
 
-가상서버에서 metadata를 받아오는데 사용하는 169.254.169.254 아이피로 curl을 하여 반환받은 metadata를 볼 수 있다. 
-```jsx
+
+가상서버에서 metadata를 받아오는데 사용하는 169.254.169.254 아이피로 curl을 하여 반환받은 metadata를 볼 수 있다.
+
+```shell-session
 root@wglee-controller-001:~# ssh -i .ssh/dvr3-key.pem ubuntu@183.10.10.77
 The authenticity of host '183.10.10.77 (183.10.10.77)' can't be established.
 ECDSA key fingerprint is SHA256:ESOc+KUkQNgmt/IOV0pGzy7Ar7XHNRFuzHTUIIYIGG8.
@@ -42,9 +54,13 @@ ubuntu@dvr3-demo12:~$ route | grep 169
 169.254.169.254 192.168.0.3     255.255.255.255 UGH   100    0        0 ens3
 ```
 
-**openstack metadata API**
-이 경우 metadata는 뒤에 /openstack 을 붙여서 요청하면 된다. 
-```jsx
+
+
+**openstack metadata API**&#x20;
+
+이 경우 metadata는 뒤에 /openstack 을 붙여서 요청하면 된다.
+
+```shell-session
 ubuntu@dvr3-demo12:~$ curl http://169.254.169.254/openstack
 2012-08-10
 2013-04-04
@@ -68,10 +84,13 @@ ubuntu@dvr3-demo12:~$ curl http://169.254.169.254/openstack/latest/meta_data.jso
 {"uuid": "795fed3a-431a-4b89-bd80-ffac22196e72", "public_keys": {"dvr3-key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC2liOFPCh/iKIUeEF1o9CGrSUQc9aKpi0BI0/oNYVkTozAcMjm/xhl6AIvYOETmeY21fLxZyrazVl7RnNTDekiATFoC8/GghHG5cuE2TGjmZHikJtWMN2tUAnbKsHacoPhp06wtdkO2hCh/TrvkF+6779hNqH0DmLyAzVmIAu5s01XlUTF30iqIlSnzS1nFj26u0cBCxOcd1X32DGCH2sZ0HoNMQ9XIa97MwSBaQ3AqCwffK01RtnWm6s6WxF8MmKKOszn8ZPel8jcm8y/SYAeI1VBxWGxhqve2+VWGV9QmPIbBcDSFX7Nr2iM2ae254ttBl/gRPDqp71wfdmA4Vwerm8rBHcU9QhsYGb1dhg7FzfB8d2GOLv3h+Fm/8ySa3ftF+ytjdNlDCje5ekorfvawfMvgPVy0CtwdwUqEgnVU17oILiUMbFpUteN3ZlbLNj97QGsK2Df4FP8ZKdvQXTTSVeTwYtlUW2xF6F0wYzA3QbNLAQy+Q2fkKcy0iKZn10= root@wglee-controller-001\n"}, "keys": [{"name": "dvr3-key", "type": "ssh", "data": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC2liOFPCh/iKIUeEF1o9CGrSUQc9aKpi0BI0/oNYVkTozAcMjm/xhl6AIvYOETmeY21fLxZyrazVl7RnNTDekiATFoC8/GghHG5cuE2TGjmZHikJtWMN2tUAnbKsHacoPhp06wtdkO2hCh/TrvkF+6779hNqH0DmLyAzVmIAu5s01XlUTF30iqIlSnzS1nFj26u0cBCxOcd1X32DGCH2sZ0HoNMQ9XIa97MwSBaQ3AqCwffK01RtnWm6s6WxF8MmKKOszn8ZPel8jcm8y/SYAeI1VBxWGxhqve2+VWGV9QmPIbBcDSFX7Nr2iM2ae254ttBl/gRPDqp71wfdmA4Vwerm8rBHcU9QhsYGb1dhg7FzfB8d2GOLv3h+Fm/8ySa3ftF+ytjdNlDCje5ekorfvawfMvgPVy0CtwdwUqEgnVU17oILiUMbFpUteN3ZlbLNj97QGsK2Df4FP8ZKdvQXTTSVeTwYtlUW2xF6F0wYzA3QbNLAQy+Q2fkKcy0iKZn10= root@wglee-controller-001\n"}], "hostname": "dvr3-demo12.novalocal", "name": "dvr3-demo12", "launch_index": 0, "availability_zone": "nova", "random_seed": "AsPjfUgLOu/F0+NOc1ZQifjDnvuG/Uqab3m93GE8btDtMub9vL+zJ76VCo0WgyFATTqkWQ/Ko8KV90Ew7yCwlOU68BMg2lHVq8sIc2L1LbH4eRdz8oD5m6GDKou3fKrtTHjyDq8MTOZWdVdzxKuwH7/uOcp9scvblS4OSnZaJ1nONUvxRxv/3eXjRckwgpBh2OA5zZe+EXpQ4RdlvowcC5/Sy4o+zPvLh6qyqp85MZ4DQvMeah9Pyypfb/z3uogqZiuJzP1uKYr3wG3yfLsot4QoUvHlVKTT4Utl5kLuCdUaMNLfSpSLO3FgygGuP+U8rez4Z1TzYNuWcGGYBB6Ri71GXFi2ctFyWma8SqVtLGU0nZ95qdYOjX4Tm09jY/OOnuI+It6TI4ojyMOwLprxc6rTxjIXyoV+V8jtNqhAFOQBuTAGDEdNG5/sCE7AnTM3lLvBms0tC63uoFR0q00ItAAc2I5Ym9IOaIOGyiJP1LHFQ4QXz0w80K1dolbfprxmAQ9jdPoye1u78xez5Hf78dBLgod4TmyfXsXVrbiclARAJX17N4m0P9qs9blIQ5q0mytprkbrOvHe5qDxQ91LDIrBjxIm2ndDc7HUp8GuA6Zw2+r0ZzO5zdsgTKArvOuc0bJ6yKrQ530hgVyAaSLc/VJ9Cu2BG2+VS1O21nY/lw0=", "project_id": "feaf6d4b8b8745fb9c955389675ef5d5", "devices": [], "dedicated_cpus": []}
 ```
 
+
+
 **AWS EC2-compatible API metadata**
 
 따로 subpath 없이 요청한다. AWS EC2 호환성에 대해서는 [metadata-ec2](https://docs.openstack.org/nova/victoria/user/metadata.html#metadata-ec2-format) 여기서 더 참고할 수 있다.
-```jsx
+
+```shell-session
 ubuntu@dvr3-curl http://169.254.169.254/latest/meta-data
 ami-id
 ami-launch-index
@@ -94,16 +113,23 @@ ubuntu@dvr3-demo12:~$ curl http://169.254.169.254/latest/meta-data/hostname; ech
 dvr3-demo12.novalocal
 ```
 
+
+
+
+
 ## How it works?
 
 결론부터 이야기 하자면, 인스턴스는 link-local ip인 169.254.169.254를 통해 neutron metadata server에 HTTP 요청을 보낸다.
 
 이때 요청을 받은 neutron metadata agent는 인스턴스와 Nova api 사이에서 metadata를 전달하기 위한 proxy 역할을 한다. 인스턴스에서 발생한 요청을 Nova 쪽으로 포워딩 하고, Nova에서 정보를 받으면 다시 인스턴스로 반환하는 것이다.
 
-이러한 일련의 과정이 어떻게 수행되는지 확인해 보도록 하자. 
+
+
+이러한 일련의 과정이 어떻게 수행되는지 확인해 보도록 하자.
 
 우선 neutron-metadata-agent서비스는 각 compute와 neutron 노드에서 동작하고 있다.
-```jsx
+
+```shell-session
 root@wglee-controller-001:~# openstack network agent list --agent-type metadata
 +--------------------------------------+----------------+----------------------+-------------------+-------+-------+------------------------+
 | ID                                   | Agent Type     | Host                 | Availability Zone | Alive | State | Binary                 |
@@ -115,18 +141,24 @@ root@wglee-controller-001:~# openstack network agent list --agent-type metadata
 +--------------------------------------+----------------+----------------------+-------------------+-------+-------+------------------------+
 ```
 
-본 게시글에서는 wglee-compute-001 노드에 스케줄링 된 dvr3-demo12 인스턴스에서 metadata를 조회할 때 어떠한 방식으로 metadata service와의 통신이 일어나는지 확인해 볼 것이다. 
 
-```jsx
+
+본 게시글에서는 wglee-compute-001 노드에 스케줄링 된 dvr3-demo12 인스턴스에서 metadata를 조회할 때 어떠한 방식으로 metadata service와의 통신이 일어나는지 확인해 볼 것이다.
+
+```shell-session
 root@wglee-controller-001:~# openstack server list --all | grep dvr3-demo12
 | 795fed3a-431a-4b89-bd80-ffac22196e72 | dvr3-demo12 | ACTIVE  | dvr3-net=192.168.0.233, 183.10.10.77  | Ubuntu-20.04 | m1.small |
 ```
 
-### Nova meatadata server Configuration
-nova-api가 동작하는 controller노드의 각 nova.conf에 다음과 같이 metadata와 관련된 설정이 되어 있다. metadata_listen 값은 해당 controller 노드의 management 네트워크 IP로 설정했다. 
 
-metadata_proxy_shared_secret의 경우 모두 동일하게 설정한다. 
-```jsx
+
+### Nova meatadata server Configuration
+
+nova-api가 동작하는 controller노드의 각 nova.conf에 다음과 같이 metadata와 관련된 설정이 되어 있다. metadata\_listen 값은 해당 controller 노드의 management 네트워크 IP로 설정했다.
+
+metadata\_proxy\_shared\_secret의 경우 모두 동일하게 설정한다.
+
+```shell-session
 root@wglee-controller-001:~# ansible -m shell -a "cat /etc/nova/nova.conf | grep -v '^$\|^#' | grep metadata" controller
  
 wglee-controller-001 | CHANGED | rc=0 >>
@@ -151,14 +183,15 @@ service_metadata_proxy = true
 metadata_proxy_shared_secret = [패스워드]
 ```
 
+
+
 ### Retrieving metadata via neutron metadata agent
-인스턴스가 metadata를 받아올 때 사용하는 169.254.169.254 아이피는 도착지의 실체가 있는 아이피가 아니다. 
-neutron-metadata-agent가 올라간 노드의 dhcp 네임스페이스에서 169.254.169.254 아이피의 80 포트로 요청을 받으면, tanent별 동작하는 haproxy 프로세스에 의해 nova-api 쪽으로 포워딩된다.
 
-지금 dvr3-demo12 가상서버는 wglee-compute-001 노드에 올라가 있다.
-dvr3-subnet의 uuid로 wglee-compute-001에서 qdhcp 네임스페이스의 인터페이스를 확인하면 tapc8c3f2f8-5e에 169.254.169.254 아이피가 등록되어 있다. 
+인스턴스가 metadata를 받아올 때 사용하는 169.254.169.254 아이피는 도착지의 실체가 있는 아이피가 아니다. neutron-metadata-agent가 올라간 노드의 dhcp 네임스페이스에서 169.254.169.254 아이피의 80 포트로 요청을 받으면, tanent별 동작하는 haproxy 프로세스에 의해 nova-api 쪽으로 포워딩된다.
 
-```jsx
+지금 dvr3-demo12 가상서버는 wglee-compute-001 노드에 올라가 있다. dvr3-subnet의 uuid로 wglee-compute-001에서 qdhcp 네임스페이스의 인터페이스를 확인하면 tapc8c3f2f8-5e에 169.254.169.254 아이피가 등록되어 있다.
+
+```shell-session
 root@wglee-compute-001:~# ip netns exec qdhcp-94927f56-cb4e-4a74-b935-f340fde1c573 bash
 
 root@wglee-compute-001:~# ip a
@@ -180,16 +213,20 @@ root@wglee-compute-001:~# ip a
        valid_lft forever preferred_lft forever
 ```
 
+
+
 wglee-compute-001에서 dvr3 프로젝트의 subent uuid 로 검색하면 metadata-proxy로 haproxy 프로세스가 동작하고 있다.
 
-```jsx
+```shell-session
 root@wglee-compute-001:~# ps -ef | grep haproxy | grep 94927f56-cb4e-4a74-b935-f340fde1c573
 neutron   278357       1  0 Mar24 ?        00:00:20 haproxy -f /var/lib/neutron/ns-metadata-proxy/94927f56-cb4e-4a74-b935-f340fde1c573.conf
 ```
 
-haproxy conf 파일을 열어보면 169.254.169.254 80포트로 들어오는 요청에 X-Neutron-Network-ID 헤더를 붙여서 백엔드로 등록된 서버에 보낸다. 
 
-```jsx
+
+haproxy conf 파일을 열어보면 169.254.169.254 80포트로 들어오는 요청에 X-Neutron-Network-ID 헤더를 붙여서 백엔드로 등록된 서버에 보낸다.
+
+```shell-session
 root@wglee-compute-001:~# cat /var/lib/neutron/ns-metadata-proxy/94927f56-cb4e-4a74-b935-f340fde1c573.conf
  
 global
@@ -223,12 +260,13 @@ listen listener
     http-request set-header X-Neutron-Network-ID 94927f56-cb4e-4a74-b935-f340fde1c573
 ```
 
-이 요청을 받은 neutron metadata agent는 /etc/neutron/metadata_agent.ini 에서 설정된 nova_metadata_host로 요청을 보낸다.
-nova_metadata_host에서 인스턴스의 metadata를 실질적으로 반환하는 것이다. 
 
-nova_metadata_host를 설정하기에 앞서, 나의 환경은 3개의 controller 노드에 haproxy가 동작하며 VIP로 받는 요청을 하위 서버로 분배하는 구조이다. 
 
-```jsx
+이 요청을 받은 neutron metadata agent는 /etc/neutron/metadata\_agent.ini 에서 설정된 nova\_metadata\_host로 요청을 보낸다. nova\_metadata\_host에서 인스턴스의 metadata를 실질적으로 반환하는 것이다.
+
+nova\_metadata\_host를 설정하기에 앞서, 나의 환경은 3개의 controller 노드에 haproxy가 동작하며 VIP로 받는 요청을 하위 서버로 분배하는 구조이다.
+
+```shell-session
 root@wglee-controller-001:~# cat /etc/haproxy/haproxy.cfg
 ...
 listen nova-metadata_8775
@@ -240,11 +278,13 @@ listen nova-metadata_8775
   server wglee-controller-003 20.20.0.22:8775 check
 ```
 
-그렇기 때문에 nova_metadata_host 값을 VIP의 도메인으로 설정하였다. 
 
-만약에 단일 controller라면, 그 노드의 nova metadata listen ip와 port를 적어주면 될 것이다. 
 
-```jsx
+그렇기 때문에 nova\_metadata\_host 값을 VIP의 도메인으로 설정하였다.
+
+만약에 단일 controller라면, 그 노드의 nova metadata listen ip와 port를 적어주면 될 것이다.
+
+```shell-session
 root@wglee-controller-001:~# ansible -m shell -a "cat /etc/neutron/metadata_agent.ini | grep -v '^$\|^#' | grep metadata" compute
 wglee-compute-002 | CHANGED | rc=0 >>
 nova_metadata_host = wglee-openstack-vip
@@ -257,11 +297,13 @@ nova_metadata_port = 8775
 metadata_proxy_shared_secret = [패스워드]
 ```
 
+
+
 ## Packet Verification
 
-실제로 metadata가 반환 되는 모습을 보기 위해 vip가 있는 controller 노드에서 vip의 8775포트로 들어오는 패킷 덤프를 뜬다. 
+실제로 metadata가 반환 되는 모습을 보기 위해 vip가 있는 controller 노드에서 vip의 8775포트로 들어오는 패킷 덤프를 뜬다.
 
-```bash
+```shell-session
 root@wglee-controller-001:~# tcpdump -i ens4 host 20.20.0.5 and tcp port 8775 -n -vvv -A -w wglee.pcap
 tcpdump: listening on ens4, link-type EN10MB (Ethernet), capture size 262144 bytes
 ^C10 packets captured
@@ -270,41 +312,27 @@ tcpdump: listening on ens4, link-type EN10MB (Ethernet), capture size 262144 byt
 
 wireshark로 패킷을 상세하게 보면 다음과 같이 neutron-metadata-agent에서 nova로 보낸 요청의 Http request header 들을 확인할 수 있다.
 
-인스턴스에서 Nova-api 로 요청을 보낼 때 neutron metadata agent 는 다음과 같은 HTTP Header를 붙여서 넘긴다. 
+인스턴스에서 Nova-api 로 요청을 보낼 때 neutron metadata agent 는 다음과 같은 HTTP Header를 붙여서 넘긴다.
 
-- X-Instance-ID
-- X-Instance-ID-Signature
-- X-Tenant-ID
-- X-Forwarded-For
+* X-Instance-ID
+* X-Instance-ID-Signature
+* X-Tenant-ID
+* X-Forwarded-For
 
-![image2023-3-26_16-59-9.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2f2cf368-4d8d-4df7-8996-995015c03c03/image2023-3-26_16-59-9.png)
+<figure><img src="../../.gitbook/assets/image2023-3-26_16-59-9.png" alt=""><figcaption></figcaption></figure>
 
-nova_metadata에서 받은 메타데이터 내용이 wglee-compute-001인 20.20.0.30을 목적지로 해서 반환 되는 것도 볼 수 있다. 
 
-실제로 패킷의 data를 보면 반환되는 meatadata 값들이 확인된다. 
 
-![image2023-3-26_16-59-9.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/96e20d5e-82d7-4020-9f55-d4cda76972d9/image2023-3-26_16-59-9.png)
+nova\_metadata에서 받은 메타데이터 내용이 wglee-compute-001인 20.20.0.30을 목적지로 해서 반환 되는 것도 볼 수 있다.
 
-## References
+실제로 패킷의 data를 보면 반환되는 meatadata 값들이 확인된다.
+
+<figure><img src="../../.gitbook/assets/image2023-3-26_16-14-37.png" alt=""><figcaption></figcaption></figure>
+
+
+
+### References
 
 [OpenStack Docs: Metadata](https://docs.openstack.org/nova/victoria/user/metadata.html#metadata-service)
 
 [https://docs.openstack.org/nova/victoria/admin/vendordata.html](https://docs.openstack.org/nova/victoria/admin/vendordata.html)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

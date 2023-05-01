@@ -8,7 +8,7 @@ description: written on 2021. 2. 19. 11:15
 
 NTP 서버의 용도와 이를 이용한 서버 시간 동기화 방법에 대해 알아보도록 한다.
 
-<figure><img src="../../.gitbook/assets/다운로드 (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/다운로드.png" alt=""><figcaption></figcaption></figure>
 
 ##
 
