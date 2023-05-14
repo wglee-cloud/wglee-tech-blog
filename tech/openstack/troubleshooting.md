@@ -4,6 +4,8 @@ description: OpenStack Victoria 릴리즈 기준으로 작성되었습니다.
 
 # Troubleshooting instance <-> External network failure issue ( DVR, with fip )
 
+## <mark style="color:blue;">Intro</mark>
+
 직접 구성한 DVR 구조의 오픈스택에서 인스턴스에 공인 아아피로 ssh가 안되는 문제가 발생했다.&#x20;
 
 콘솔로는 로그인이 되기 때문에 인스턴스 생성 자체에는 이상이 없고 네트워크 이슈로 추측이 되었다.&#x20;
@@ -26,7 +28,7 @@ description: OpenStack Victoria 릴리즈 기준으로 작성되었습니다.
 
 
 
-## 대상 인스턴스
+## <mark style="color:blue;">대상 인스턴스</mark>
 
 다음 인스턴스를 대상으로 트러블슈팅을 진행하였다. wglee-compute-002에 스케줄링 된 인스턴스이다.
 
@@ -71,7 +73,7 @@ root@wglee-controller-001:~# openstack server show  1a3be680-daf7-4f29-9413-9467
 
 
 
-## Compute 노드 br-ex 구간
+## <mark style="color:blue;">Compute 노드 br-ex 구간</mark>
 
 인스턴스에 ssh 접속을 시도한 deploy 서버에서 공인 아이피의 map에 대해 arp response를 받아왔는지 우선 확인해 보았다.&#x20;
 
@@ -154,7 +156,7 @@ root@deploy:~# arp -a | grep 183.10.10.142
 
 
 
-## Compute 노드  qrouter <-> 인스턴스 구간
+## <mark style="color:blue;">Compute 노드  qrouter <-> 인스턴스 구간</mark>
 
 하지만 여전히 ssh가 되지 않는다.&#x20;
 
@@ -345,7 +347,7 @@ Chain neutron-openvswi-if1008856-2 (1 references)
 
 
 
-## 결론 및 소감
+## <mark style="color:blue;">결론 및 소감</mark>
 
 이제 정상적으로 ssh 가 된다. 결국 security group 문제였다 ..^^&#x20;
 
