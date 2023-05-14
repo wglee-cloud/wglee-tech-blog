@@ -17,7 +17,11 @@ Service의 기능은 다음과 같다.
 Service에는 3가지 종류가 있다.\
 NodePort / ClusterPort / LoadBalancer 타입이다. 하나씩 알아보도록 하자!
 
-![](https://blog.kakaocdn.net/dn/c08oXF/btrQ0HDkzBX/Gt9fO4kUnvSNZ0ktwgAju1/img.png)
+<div align="left">
+
+<img src="https://blog.kakaocdn.net/dn/c08oXF/btrQ0HDkzBX/Gt9fO4kUnvSNZ0ktwgAju1/img.png" alt="">
+
+</div>
 
 
 
@@ -30,7 +34,11 @@ Worker Node의 특정 port를 개방하여 외부에서 pod에 접근할 수 있
 Node port는 definition 파일에서 지정할 수 있지만 따로 정하지 않을 경우 30000\~32767 사이에서 랜덤하게 부여된다.\
 만약 원하는 NodePort를 명시하려면 ports: 섹션에 `nodePort: 30000` 이런식으로 추가하면 된다.
 
-![](https://blog.kakaocdn.net/dn/dh3uFM/btrQ65Je7Fc/e4zeSi3w9BaktTDTRcDBf0/img.png)
+<div align="left">
+
+<img src="https://blog.kakaocdn.net/dn/dh3uFM/btrQ65Je7Fc/e4zeSi3w9BaktTDTRcDBf0/img.png" alt="">
+
+</div>
 
 ### NodePort Service 생성하기
 
@@ -140,7 +148,11 @@ frontend / backend application 이 동작하는 pod가 각각 동작하고 있�
 frontend pod와 backend pod는 서로 통신해야 하는데 각 pod ip를 목적지로 해서 통신하는 것은 경우의 수가 너무 많을 뿐더러, pod가 재생성 될 경우 pod ip 또한 변동이 있을 수 있어 좋은 방법이 아니다.\
 이때 Service를 ClusterIP 타입으로 배포함으로써 하나의 Service object를 거처 서로 통신하도록 할 수 있다.
 
+<div align="left">
+
 <figure><img src="https://blog.kakaocdn.net/dn/5dI0S/btrQ1Kzj0QU/l2snQkOtG8VYdwacJ5ZpH0/img.png" alt=""><figcaption></figcaption></figure>
+
+</div>
 
 ### ClusterIP Service 생성하기
 

@@ -324,7 +324,11 @@ wireshark로 패킷을 상세하게 보면 다음과 같이 neutron-metadata-age
 * X-Tenant-ID
 * X-Forwarded-For
 
+<div align="left">
+
 <figure><img src="../../.gitbook/assets/image2023-3-26_16-14-37 (2).png" alt=""><figcaption></figcaption></figure>
+
+</div>
 
 
 
@@ -332,7 +336,11 @@ nova\_metadata에서 받은 메타데이터 내용이 wglee-compute-001인 20.20
 
 실제로 패킷의 data를 보면 반환되는 meatadata 값들이 확인된다.
 
-<figure><img src="../../.gitbook/assets/image2023-3-26_16-59-9.png" alt=""><figcaption></figcaption></figure>
+<div align="left">
+
+<figure><img src="../../.gitbook/assets/image2023-3-26_16-59-9 (1).png" alt=""><figcaption></figcaption></figure>
+
+</div>
 
 
 

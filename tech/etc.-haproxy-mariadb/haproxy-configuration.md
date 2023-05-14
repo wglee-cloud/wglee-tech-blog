@@ -175,7 +175,11 @@ root@wglee-controller-001:~# curl -o /dev/null -s -w %{http_code} 20.20.0.20:330
 000
 ```
 
+<div align="left">
+
 <figure><img src="https://blog.kakaocdn.net/dn/nti1s/btr3XW862ME/JkQZRY8Dp5kwdnu3ydyrv1/img.png" alt=""><figcaption></figcaption></figure>
+
+</div>
 
 내 haproxy 설정 기준으로 frontend / backend / listen 에 적용된 옵션을 각각 설명하다 보니까 공통으로 사용할 수 있는 옵션도 여기저기 적어버렸다.\
 상황에 맞게 확인해서 잘 사용해야겠다.
