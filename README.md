@@ -18,7 +18,7 @@ coverY: 0
 
 ## Recent Posts
 
-<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td></td><td><strong>How Nova instance retrieves Metadata in OpenStack?</strong></td><td></td><td><a href="tech/openstack/how-nova-instance-retrieves-metadata-in-openstack.md">how-nova-instance-retrieves-metadata-in-openstack.md</a></td><td><a href=".gitbook/assets/image2023-3-26_16-14-37 (2).png">image2023-3-26_16-14-37 (2).png</a></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td></td><td><strong>How Nova instance retrieves Metadata in OpenStack?</strong></td><td></td><td><a href="tech/openstack/how-nova-instance-retrieves-metadata-in-openstack.md">how-nova-instance-retrieves-metadata-in-openstack.md</a></td><td><a href=".gitbook/assets/image2023-3-26_16-14-37 (2).png">image2023-3-26_16-14-37 (2).png</a></td></tr><tr><td></td><td><strong>Troubleshooting instance &#x3C;-> External network failure issue ( DVR, with fip )</strong></td><td></td><td><a href="tech/openstack/troubleshooting.md">troubleshooting.md</a></td><td><a href=".gitbook/assets/Untitled.png">Untitled.png</a></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
 
 
 
