@@ -71,7 +71,7 @@ root@wglee-controller-001:~# openstack server show  1a3be680-daf7-4f29-9413-9467
 
 
 
-## 각 compute 노드에서 br-ex 생성
+## Compute 노드 br-ex 구간
 
 인스턴스에 ssh 접속을 시도한 deploy 서버에서 공인 아이피의 map에 대해 arp response를 받아왔는지 우선 확인해 보았다.&#x20;
 
@@ -154,7 +154,7 @@ root@deploy:~# arp -a | grep 183.10.10.142
 
 
 
-## Security Group 추가하기
+## Compute 노드  qrouter <-> 인스턴스 구간
 
 하지만 여전히 ssh가 되지 않는다.&#x20;
 
@@ -342,6 +342,10 @@ Chain neutron-openvswi-if1008856-2 (1 references)
 ```
 
 
+
+
+
+## 결론 및 소감
 
 이제 정상적으로 ssh 가 된다. 결국 security group 문제였다 ..^^&#x20;
 
