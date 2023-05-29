@@ -73,7 +73,7 @@
 * [🤔 OpenStack](tech/openstack/README.md)
   * [Skyline Project Contribution](tech/openstack/contribution.md)
   * [How Nova instance retrieves Metadata in OpenStack?](tech/openstack/how-nova-instance-retrieves-metadata-in-openstack.md)
-  * [Troubleshooting instance <-> External network failure issue ( DVR, with fip )](tech/openstack/troubleshooting.md)
+  * [Troubleshooting instance <-> Internet failure issue ( DVR, with fip )](tech/openstack/troubleshooting.md)
 * [👀 Monitoring](tech/monitoring.md)
 * [🚎 ETC. ( HAProxy, MariaDB.. )](tech/etc.-haproxy-mariadb.md)
   * [HAProxy Configuration](tech/etc.-haproxy-mariadb/haproxy-configuration.md)
