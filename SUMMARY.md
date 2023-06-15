@@ -71,7 +71,7 @@
   * [Ansible Vault로 민감한 데이터 암호화하기](tech/iac/ansible-vault.md)
   * [( 메모 ) Ansible role base 구조 및 inventory 그룹핑 방법](tech/iac/ansible-role-base-inventory.md)
 * [🤔 OpenStack](tech/openstack/README.md)
-  * [Page 1](tech/openstack/page-1.md)
+  [* [Page 1](tech/openstack/page-1.md)]: #  
   * [How Nova instance retrieves Metadata in OpenStack?](tech/openstack/how-nova-instance-retrieves-metadata-in-openstack.md)
   * [Troubleshooting instance <-> Internet failure issue ( DVR, with fip )](tech/openstack/troubleshooting.md)
 * [👀 Monitoring](tech/monitoring.md)
