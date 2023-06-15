@@ -1,3 +1,0 @@
-# Skyline Project Contribution
-
-sss
