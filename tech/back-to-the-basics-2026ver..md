@@ -1,4 +1,4 @@
-# Back to the Basics (2026ver.)
+# 🅱️ Back to the Basics (2026ver.)
 
 벌써 2026년도가 된지도 2개월이 지났다.&#x20;
 
