@@ -79,3 +79,7 @@
 * [🚎 ETC. ( HAProxy, MariaDB.. )](tech/etc.-haproxy-mariadb.md)
   * [HAProxy Configuration](tech/etc.-haproxy-mariadb/haproxy-configuration.md)
   * [Remote client 에서 MariaDB 원격 접속 방법](tech/etc.-haproxy-mariadb/remote-client-mariadb.md)
+
+## 🧑‍🦰 Personal
+
+* [Books](personal/books.md)
