@@ -82,4 +82,4 @@
 
 ## 🧑‍🦰 Personal
 
-* [Books](personal/books.md)
+* [📚 Books](personal/books.md)
