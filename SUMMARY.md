@@ -4,6 +4,7 @@
 
 ## 🖥️ Tech
 
+* [Back to the Basics (2026ver.)](tech/back-to-the-basics-2026ver..md)
 * [✨ Linux](tech/linux/README.md)
   * [NTP](tech/linux/ntp.md)
   * [NTPD로 NTP 설정하기](tech/linux/ntpd-ntp.md)
