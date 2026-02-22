@@ -2,7 +2,7 @@
 
 * [👋 Welcome to wglee's Blog](README.md)
 
-## 🖥 Tech
+## 🖥️ Tech
 
 * [✨ Linux](tech/linux/README.md)
   * [NTP](tech/linux/ntp.md)
@@ -33,7 +33,7 @@
   * [fallocate 명령어로 만든 파일의 mkswap 불가 현상 (sparse file)](tech/linux/fallocate-mkswap-sparse-file.md)
   * [헷갈리는 데이터의 단위 정리 ( KB, KiB / MB, MiB )](tech/linux/kb-kib-mb-mib.md)
   * [PAM 개념 및 패스워드 복잡성 설정 방법 (pwquality.conf)](tech/linux/pam-pwquality.conf.md)
-  * [\[Session Timeout\] sshd\_config의 ClientAlive\* 와 Shell 변수 TMOUT 의 차이](tech/linux/session-timeout-sshd\_config-clientalive-shell-tmout.md)
+  * [\[Session Timeout\] sshd\_config의 ClientAlive\* 와 Shell 변수 TMOUT 의 차이](tech/linux/session-timeout-sshd_config-clientalive-shell-tmout.md)
   * [UMASK 개념과 UMASK 원리를 활용한 협업 디렉터리 구성하기](tech/linux/umask-umask.md)
   * [KDUMP - vmcore 분석 방법](tech/linux/kdump-vmcore.md)
   * [\[Linux\] How to set password expiry date](tech/linux/linux-how-to-set-password-expiry-date.md)
@@ -56,7 +56,7 @@
   * [04. Namespace를 이용한 리소스 그룹화](tech/kubernetes/04.-namespace.md)
   * [03. Label을 이용한 Pod 구성](tech/kubernetes/03.-label-pod.md)
   * [02. YAML 또는 JSON 디스크립터로 Pod 생성하기](tech/kubernetes/02.-yaml-json-pod.md)
-  * [01. Pod\_쿠버네티스에서 컨테이너 실행하기](tech/kubernetes/01.-pod\_.md)
+  * [01. Pod\_쿠버네티스에서 컨테이너 실행하기](tech/kubernetes/01.-pod_.md)
 * [🎯 Ceph](tech/ceph/README.md)
   * [Ceph 기본 동작 원리](tech/ceph/ceph.md)
   * [ceph-deploy로 Ceph 배포하기](tech/ceph/ceph-deploy-ceph/README.md)
@@ -71,7 +71,6 @@
   * [Ansible Vault로 민감한 데이터 암호화하기](tech/iac/ansible-vault.md)
   * [( 메모 ) Ansible role base 구조 및 inventory 그룹핑 방법](tech/iac/ansible-role-base-inventory.md)
 * [🤔 OpenStack](tech/openstack/README.md)
-  [* [Page 1](tech/openstack/page-1.md)]: #  
   * [How Nova instance retrieves Metadata in OpenStack?](tech/openstack/how-nova-instance-retrieves-metadata-in-openstack.md)
   * [Troubleshooting instance <-> Internet failure issue ( DVR, with fip )](tech/openstack/troubleshooting.md)
 * [👀 Monitoring](tech/monitoring.md)
