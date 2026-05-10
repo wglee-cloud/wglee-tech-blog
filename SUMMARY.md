@@ -4,8 +4,6 @@
 
 ## 🖥️ Tech
 
-* [🤖 AI Trends](tech/ai-trends.md)
-* [🅱️ Back to the Basics (2026ver.)](tech/back-to-the-basics-2026ver..md)
 * [✨ Linux](tech/linux/README.md)
   * [NTP](tech/linux/ntp.md)
   * [NTPD로 NTP 설정하기](tech/linux/ntpd-ntp.md)
@@ -39,6 +37,8 @@
   * [UMASK 개념과 UMASK 원리를 활용한 협업 디렉터리 구성하기](tech/linux/umask-umask.md)
   * [KDUMP - vmcore 분석 방법](tech/linux/kdump-vmcore.md)
   * [\[Linux\] How to set password expiry date](tech/linux/linux-how-to-set-password-expiry-date.md)
+  * [HAProxy Configuration](tech/linux/haproxy-configuration.md)
+  * [Remote client 에서 MariaDB 원격 접속 방법](tech/linux/remote-client-mariadb.md)
 * [🌟 Network](tech/network/README.md)
   * [Network bandwidth의 개념과 Throughput 과의 차이](tech/network/network-bandwidth-throughput.md)
   * [통신 장비 - 03. 네트워크 계층 Router](tech/network/03.-router.md)
@@ -76,10 +76,10 @@
   * [How Nova instance retrieves Metadata in OpenStack?](tech/openstack/how-nova-instance-retrieves-metadata-in-openstack.md)
   * [Troubleshooting instance <-> Internet failure issue ( DVR, with fip )](tech/openstack/troubleshooting.md)
 * [👀 Monitoring](tech/monitoring.md)
-* [🚎 ETC. ( HAProxy, MariaDB.. )](tech/etc.-haproxy-mariadb.md)
-  * [HAProxy Configuration](tech/etc.-haproxy-mariadb/haproxy-configuration.md)
-  * [Remote client 에서 MariaDB 원격 접속 방법](tech/etc.-haproxy-mariadb/remote-client-mariadb.md)
+* [🐇 RabbitMQ](tech/rabbitmq.md)
 
 ## 🧑‍🦰 Personal
 
 * [📚 Books](personal/books.md)
+* [📒 Notes](personal/notes/README.md)
+  * [2026.05](personal/notes/2026.05.md)

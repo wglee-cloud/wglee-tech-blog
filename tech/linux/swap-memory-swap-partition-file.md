@@ -31,7 +31,7 @@ description: Written on 2022. 3. 1. 14:52
 권장 swap 공간은 OS 설치 중에 자동으로 설정 된다.
 
 하지만 hibernation 모드를 사용하는 경우에는 사용자가 swap 공간을 수동 편집해야 한다.\
-_hibernation?_ : 시스템 전원을 끄기 전에 시스템 메모리에 있는 모든 내용을 Hard disk 와 같은 비활성 메모리에 기록하는 것.
+&#xNAN;_&#x68;ibernation?_ : 시스템 전원을 끄기 전에 시스템 메모리에 있는 모든 내용을 Hard disk 와 같은 비활성 메모리에 기록하는 것.
 
 Redhat 문서에서 제공하는 권장 사양은 다음과 같다.
 

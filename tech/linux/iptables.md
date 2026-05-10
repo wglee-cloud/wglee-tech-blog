@@ -70,9 +70,8 @@ iptables.txt
 [centos@test ~]$ iptables -I INPUT <other options>
 ```
 
-*   \-A 옵션 (append) 해당 룰을 지정한 INPUT chain의 마지막 rule으로 append한다.\
-    보통은 Input chain의 가장 마지막에 모든 패킷을 drop 시키는 rule을 추가하고는 한다.\
-
+*   -A 옵션 (append) 해당 룰을 지정한 INPUT chain의 마지막 rule으로 append한다.\
+    보통은 Input chain의 가장 마지막에 모든 패킷을 drop 시키는 rule을 추가하고는 한다.<br>
 
     ```shell-session
     [centos@test ~]$ sudo iptables -A INPUT -j DROP
@@ -90,9 +89,8 @@ iptables.txt
 
 
 
-*   \-I 옵션 (insert) 지정한 chain의 몇번째에 insert 할지 정할 수 있다. 별도의 line number를 지정하지 않았을 경우 default로는 제일 상단에 rule을 추가한다.\
-    예를 들어 ssh 접속을 위해 22번 input packet을 허용하는 rule은 다음과 같이 추가할 수 있다. \
-
+*   -I 옵션 (insert) 지정한 chain의 몇번째에 insert 할지 정할 수 있다. 별도의 line number를 지정하지 않았을 경우 default로는 제일 상단에 rule을 추가한다.\
+    예를 들어 ssh 접속을 위해 22번 input packet을 허용하는 rule은 다음과 같이 추가할 수 있다. <br>
 
     ```shell-session
     [centos@test ~]$ sudo iptables -I INPUT 2 -s 192.168.0.30/24 -p tcp --dport 22 -j ACCEPT
@@ -106,8 +104,7 @@ iptables.txt
 
 
 
-*   \-D (delete) 지정한 line에 있는 rule을 삭제한다.\
-
+*   -D (delete) 지정한 line에 있는 rule을 삭제한다.<br>
 
     ```shell-session
     [centos@test ~]$ sudo iptables -D INPUT 2
@@ -149,7 +146,7 @@ insert, append, delete 등에 대한 명령어 규칙은 INPUT chain 하면서 �
 #### 참고 문서
 
 * [Sysadmin tools: How to use iptables](https://www.redhat.com/sysadmin/iptables)
-* [5.13. SETTING AND CONTROLLING IP SETS USING IPTABLES](https://access.redhat.com/documentation/en-us/red\_hat\_enterprise\_linux/7/html/security\_guide/sec-setting\_and\_controlling\_ip\_sets\_using\_iptables)
+* [5.13. SETTING AND CONTROLLING IP SETS USING IPTABLES](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/sec-setting_and_controlling_ip_sets_using_iptables)
 * [Sysadmin tools: How to use iptables](https://www.redhat.com/sysadmin/iptables)
 
 &#x20;

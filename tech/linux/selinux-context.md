@@ -8,8 +8,7 @@ description: Written on 2021. 8. 26. 00:29
 
 SELinux는 리눅스의 보안 기능으로, 파일과 같은 리눅스의 리소스에 대한 접근 권한을 제어할 수 있다.\
 어떤 프로세스가 어떤 파일, 디렉터리, 포트에 접근 가능한지 세부적인 규칙을 설정할 수 있게 된다.\
-\
-
+<br>
 
 ## SELinux Modes
 
@@ -31,8 +30,7 @@ usage:  setenforce [ Enforcing | Permissive | 1 | 0 ]
 Permissive
 ```
 
-\
-
+<br>
 
 ## SELinux labels
 
@@ -64,8 +62,7 @@ system_u:system_r:httpd_t:s0
 httpd\_t Role을 가진 프로세스는 httpd\_sys\_script\_exec\_t Role이 적용된 디렉터리에 접근 가능하다.\
 하지만 httpd\_t Role이 없는 mariadb 프로세스의 경우 httpd\_sys\_script\_exec\_t 에 대한 권한 또한 없기 때문에 /var/www/html에 접근이 불가능 하다.\
 \
-\
-
+<br>
 
 ## 디렉터리의 SELinux context 변경하기
 

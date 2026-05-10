@@ -138,10 +138,10 @@ backend web_servers
 **balance** : 로드밸런싱할 알고리즘을 지정한다. (roundrobin, leastconn)\
 **option httpchk** : HAProxy가 백엔드 서버에 대해 Layer 7 헬스 체크를 하도록 한다. 응답이 없는 서버에는 요청 포워딩하지 않음.\
 **default-server** : 이후에 따라오는 server 들에 공통으로 적용되는 디폴트 세팅\
-\-> inter : health check 의 interval을 의미한다.\
-\-> rise : backend server가 동작 중이라고 여기기 위해 성공적으로 수행되어야 하는 health check의 횟수 ( 기본은 2 )\
-\-> fall : backend server가 죽었다고 여기기 위해 실패해야 하는 health check의 횟수. ( 기본은 3 )\
-\-> check : backend server에 대해 health check를 활성화 한다.\
+-> inter : health check 의 interval을 의미한다.\
+-> rise : backend server가 동작 중이라고 여기기 위해 성공적으로 수행되어야 하는 health check의 횟수 ( 기본은 2 )\
+-> fall : backend server가 죽었다고 여기기 위해 실패해야 하는 health check의 횟수. ( 기본은 3 )\
+-> check : backend server에 대해 health check를 활성화 한다.\
 server : 벡엔드로 사용할 서버 등록
 
 
@@ -175,11 +175,7 @@ root@wglee-controller-001:~# curl -o /dev/null -s -w %{http_code} 20.20.0.20:330
 000
 ```
 
-<div align="left">
-
-<figure><img src="https://blog.kakaocdn.net/dn/nti1s/btr3XW862ME/JkQZRY8Dp5kwdnu3ydyrv1/img.png" alt=""><figcaption></figcaption></figure>
-
-</div>
+<div align="left"><figure><img src="https://blog.kakaocdn.net/dn/nti1s/btr3XW862ME/JkQZRY8Dp5kwdnu3ydyrv1/img.png" alt=""><figcaption></figcaption></figure></div>
 
 내 haproxy 설정 기준으로 frontend / backend / listen 에 적용된 옵션을 각각 설명하다 보니까 공통으로 사용할 수 있는 옵션도 여기저기 적어버렸다.\
 상황에 맞게 확인해서 잘 사용해야겠다.
@@ -194,3 +190,4 @@ root@wglee-controller-001:~# curl -o /dev/null -s -w %{http_code} 20.20.0.20:330
 * [https://www.haproxy.com/blog/exploring-the-haproxy-stats-page/](https://www.haproxy.com/blog/exploring-the-haproxy-stats-page/)
 * [https://www.haproxy.com/blog/the-four-essential-sections-of-an-haproxy-configuration/#maxconn-1](https://www.haproxy.com/blog/the-four-essential-sections-of-an-haproxy-configuration/#maxconn-1)
 * [http://docs.haproxy.org/2.6/configuration.html#5.2-port](http://docs.haproxy.org/2.6/configuration.html#5.2-port)
+

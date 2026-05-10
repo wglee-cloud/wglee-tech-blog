@@ -25,10 +25,10 @@ repo 디렉터리에 레포지터리에서 관리할 rpm 파일들을 위치 시
 나는 두가지 방법으로 rpm 파일을 다운 받았다.\
 1번은 개인 학습용으로 해 본 것으로, 만약 실제로 특정 mirror에서 다수의 패키지를 다운받아서 로컬에서 관리하고자 함이라면\
 2번에 해당하는 reposync 방법이 제일 활용도 높을 것이다.\
-**(1)** 14-.2.0 버전의 ceph 패키지를 mirror에서 wget으로 다운\
+&#xNAN;**(1)** 14-.2.0 버전의 ceph 패키지를 mirror에서 wget으로 다운\
 ~~(2) `yumdownloader --resolve [패키지명]` 으로 dependency 걸린 패키지들까지 resolve 해서 다운~~\
 ~~yumdownloader 명령어는 rpm 파일을 설치하지 않고 로컬에 내려받는 역할만 한다.~~\
-**(2)** `reposync` 명령어를 사용하여 원격지 mirror의 패키지를 로컬에 다운로드
+&#xNAN;**(2)** `reposync` 명령어를 사용하여 원격지 mirror의 패키지를 로컬에 다운로드
 
 
 
@@ -43,13 +43,13 @@ repo 디렉터리에 레포지터리에서 관리할 rpm 파일들을 위치 시
 (2) 번에 해당하는 방법은 다음과 같다.\
 `reposync` 는 yum repo를 원격 디렉터리에 sync 할 수 있는 명령어이다. \
 쓰인 옵션의 의미도 알아보자.\
-**-g** : --gpgcheck. gpgcheck fail 한 패키지는 삭제한다.\
-**-l** : --plugins. yum 플러그인을 활성화 한다.\
-**-d** : --delete. 로컬에 있는 패키지 중, 원격 repo에 없는 것이라면 삭제한다.\
-**-m** : --downloadcomps. comps.xml 도 다운로드 한다.\
-**--repoid** : 질의할 repo의 ID를 지정한다. 나는 wglee-docker.repo 파일로 등록한 wglee-docker-repo로 지정했다.\
-**--download-metadata** : 모든 metadata를 다운로드 한다.\
-**--download\_path** : 패키지를 다운로드할 디렉터리를 지정한다. 기본값은 현 디렉터리.
+&#xNAN;**-g** : --gpgcheck. gpgcheck fail 한 패키지는 삭제한다.\
+&#xNAN;**-l** : --plugins. yum 플러그인을 활성화 한다.\
+&#xNAN;**-d** : --delete. 로컬에 있는 패키지 중, 원격 repo에 없는 것이라면 삭제한다.\
+&#xNAN;**-m** : --downloadcomps. comps.xml 도 다운로드 한다.\
+&#xNAN;**--repoid** : 질의할 repo의 ID를 지정한다. 나는 wglee-docker.repo 파일로 등록한 wglee-docker-repo로 지정했다.\
+&#xNAN;**--download-metadata** : 모든 metadata를 다운로드 한다.\
+&#xNAN;**--download\_path** : 패키지를 다운로드할 디렉터리를 지정한다. 기본값은 현 디렉터리.
 
 
 

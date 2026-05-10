@@ -1,3 +1,7 @@
+---
+description: 2022년도에 작성된 글입니다.
+---
+
 # Remote client 에서 MariaDB 원격 접속 방법
 
 ## Intro
@@ -26,10 +30,10 @@ MariaDB 패키지를 설치하기 위해서는 아래 링크에서 yum repo를 �
 
 db 서버에서 아래의 명령어로 root 패스워드를 초기화 한다.\
 해당 명령어는 shell script 기반으로 동작하며, 다음 항목들을 초기 설정할 수 있다.\
-\-> root password 초기화\
-\-> 원격지에서 root로 접근 못하도록 제한\
-\-> MariaDB 설치시에 테스트 위해 생성된 anonymous 사용자 계정 제거\
-\-> anonymous 사용자가 접근할 수 있는 test 데이터베이스 제거
+-> root password 초기화\
+-> 원격지에서 root로 접근 못하도록 제한\
+-> MariaDB 설치시에 테스트 위해 생성된 anonymous 사용자 계정 제거\
+-> anonymous 사용자가 접근할 수 있는 test 데이터베이스 제거
 
 ```
 [root@wglee-db ~]#  mysql_secure_installation
@@ -128,3 +132,4 @@ Database changed
 ```
 
 [https://webdock.io/en/docs/how-guides/database-guides/how-enable-remote-access-your-mariadbmysql-database](https://webdock.io/en/docs/how-guides/database-guides/how-enable-remote-access-your-mariadbmysql-database)
+

@@ -20,8 +20,8 @@ NAT는 IP를 참조하는 L3 계층에 해당한다.\
 다음과 같이 상황과 용도에 맞게 NAT 설정을 할 수 있으나 나는 iptables에 적용하는 것을 테스트 해 보겠다!
 
 \
-**(네트워크 물리 장비)** - router 에 NAT 설정\
-**(linux)** - iptables 로 NAT 설정
+&#xNAN;**(네트워크 물리 장비)** - router 에 NAT 설정\
+&#xNAN;**(linux)** - iptables 로 NAT 설정
 
 
 

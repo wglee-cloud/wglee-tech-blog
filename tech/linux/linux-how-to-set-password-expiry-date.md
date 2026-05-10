@@ -71,13 +71,13 @@ Number of days of warning before password expires       : 7
 ```
 
 chage 옵션은 다음과 같다.\
-**-m** : min days\
-**-M** : max days\
-**-W** : warn days\
-**-I** : (대문자 i) inactive days\
-**-d** : last chage date\
-**-l** : (소문자 L) details of aging policy of an account\
-**-E** : set the exact expiry date (YYYY-MM-DD 형식)
+&#xNAN;**-m** : min days\
+&#xNAN;**-M** : max days\
+&#xNAN;**-W** : warn days\
+&#xNAN;**-I** : (대문자 i) inactive days\
+&#xNAN;**-d** : last chage date\
+&#xNAN;**-l** : (소문자 L) details of aging policy of an account\
+&#xNAN;**-E** : set the exact expiry date (YYYY-MM-DD 형식)
 
 
 

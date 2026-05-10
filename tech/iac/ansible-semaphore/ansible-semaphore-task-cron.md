@@ -19,16 +19,14 @@ Semaphore를 통해 task에 cron 을 걸어서 스케줄링을 할 수도 있다
 
 ## **Environment 생성**
 
-나는 따로 외부에서 변수 지정할 것은 없어서 빈 파일을 생성했다.\
-
+나는 따로 외부에서 변수 지정할 것은 없어서 빈 파일을 생성했다.<br>
 
 <figure><img src="https://blog.kakaocdn.net/dn/con2if/btrLukyuTrZ/4DnMTO5k3lS7uusVCBdlk0/img.png" alt=""><figcaption></figcaption></figure>
 
 ## **SSH Key 생성**
 
 target에 task를 돌릴 때 사용할 ssh key 등록\
-semaphore가 동작하는 master 서버에서 target 서버에 접속하여 플레이북을 실행할 때 사용할 ssh 개인키를 등록한다.\
-
+semaphore가 동작하는 master 서버에서 target 서버에 접속하여 플레이북을 실행할 때 사용할 ssh 개인키를 등록한다.<br>
 
 <figure><img src="https://blog.kakaocdn.net/dn/HDH5h/btrLou93KJR/22oVHhr0IIqt7p62BdsVkk/img.png" alt=""><figcaption></figcaption></figure>
 

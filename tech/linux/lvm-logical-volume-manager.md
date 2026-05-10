@@ -39,21 +39,18 @@ LVM은 파티션 대신에 volume이라는 단위로 저장 장치를 다룬다.
 ### 물리적 볼륨 / PV (Physical Volume)
 
 \- 실제 디스크 장치를 분할한 파티션된 상태를의미한다.\
-\- PV는 일정한 크기의 PE들로 구성된다.\
-
+\- PV는 일정한 크기의 PE들로 구성된다.<br>
 
 ### 물리적 확장 / PE (Physical Extent)
 
 \- PV를 구성하는 일정한 크기의 Block.\
 \- 보통 1PE는 4MB에 해당한다.\
-\- PE와 LE는 1:1로 대응한다.\
-
+\- PE와 LE는 1:1로 대응한다.<br>
 
 ### 볼륨 그룹 / VG (Volume Group)
 
 \- PV들이 모여서 생성되는 단위이다. (모든걸 합친 거대한 지점토 덩어리의 느낌이다)\
-\- 사용자는 VG를 원하는대로 쪼개서 LV로 만들게 된다.\
-
+\- 사용자는 VG를 원하는대로 쪼개서 LV로 만들게 된다.<br>
 
 ### 논리적 볼륨 / LV (Logical Volume)
 
@@ -372,7 +369,7 @@ mount point에 마운트
 
 ## **참고 문서**
 
-* [https://access.redhat.com/documentation/ko-kr/red\_hat\_enterprise\_linux/6/html/logical\_volume\_manager\_administration/doc\_organization](https://access.redhat.com/documentation/ko-kr/red\_hat\_enterprise\_linux/6/html/logical\_volume\_manager\_administration/doc\_organization)
+* [https://access.redhat.com/documentation/ko-kr/red\_hat\_enterprise\_linux/6/html/logical\_volume\_manager\_administration/doc\_organization](https://access.redhat.com/documentation/ko-kr/red_hat_enterprise_linux/6/html/logical_volume_manager_administration/doc_organization)
 * [https://tech.cloud.nongshim.co.kr/2018/11/23/lvmlogical-volume-manager-1-%EA%B0%9C%EB%85%90/](https://tech.cloud.nongshim.co.kr/2018/11/23/lvmlogical-volume-manager-1-%EA%B0%9C%EB%85%90/)
 * [https://tech.cloud.nongshim.co.kr/2018/11/28/lvmlogical-volume-manager-linux-%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4%EC%97%90%EC%84%9C-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B01-2/](https://tech.cloud.nongshim.co.kr/2018/11/28/lvmlogical-volume-manager-linux-%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4%EC%97%90%EC%84%9C-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B01-2/)
 
